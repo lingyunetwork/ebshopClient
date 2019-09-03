@@ -12,7 +12,7 @@ class SingleBar extends StatelessWidget {
           quarterTurns: 1,
           child: Icon(Icons.remove),
         ),
-        Util.getTileBar("TEST",)
+        Util.getTitleBar("TEST",)
       ],
     );
 

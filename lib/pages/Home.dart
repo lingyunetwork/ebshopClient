@@ -8,24 +8,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with EStage, TickerProviderStateMixin {
-  PageList categoryList;
-
   TabController _tabController;
+  TabController _slivertabController;
+  List<Widget> categoryTabs;
   @override
   void initState() {
-    categoryList = PageList(Axis.horizontal);
-    categoryList.createItemRender = () {
-      return IListItemRender();
-    };
+    categoryTabs = List();
 
-    var categorys = <String>[];
     for (var i = 0; i < 20; i++) {
-      categorys.add('美妆$i');
+      var text = "美妆$i";
+      double w = 20 * text.length.toDouble();
+      var tab = Container(
+        //color: Colors.red,
+        width: w,
+        height: 30,
+        child: Util.getMinTab(text),
+      );
+      categoryTabs.add(tab);
     }
-    categoryList.state = this;
-    categoryList.dataProvider = categorys;
 
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: categoryTabs.length, vsync: this);
+    _slivertabController = TabController(length: 2, vsync: this);
 
     super.initState();
   }
@@ -33,7 +36,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     var list = <Widget>[
-      swiper(),
+      //swiper(),
       category(),
       SingleBar(),
       CardItem(),
@@ -47,24 +50,14 @@ class _HomePageState extends State<HomePage>
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
-            elevation: innerBoxIsScrolled?0:1,
+            elevation: innerBoxIsScrolled ? 0 : 1,
             title: Text("标题"),
-            flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text("多出来的标题",
-                    style: TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 16.0,
-                    )),
-                background: Image.network(
-                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550383267899&di=9b9fe57bd7a0bd55c7d673ad449360b1&imgtype=0&src=http%3A%2F%2Fpptdown.pptbz.com%2Fpptbeijing%2F%25E9%2592%25A2%25E9%2593%2581%25E4%25BE%25A0%25E5%25B8%2585%25E6%25B0%2594%25E6%2589%258B%25E7%25BB%2598%25E8%25AE%25BE%25E8%25AE%25A1PPT%25E8%2583%258C%25E6%2599%25AF%25E5%259B%25BE%25E7%2589%2587.jpg",
-                  fit: BoxFit.fill,
-                )),
+            flexibleSpace: swiper(),
           ),
           SliverPersistentHeader(
             pinned: true,
             delegate: _SliverPersistentHeaderDelegate(TabBar(
-                controller: _tabController,
+                controller: _slivertabController,
                 labelColor: Colors.blue,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
@@ -80,10 +73,29 @@ class _HomePageState extends State<HomePage>
     return Column(
       children: <Widget>[
         SearchBar(),
-        categoryList.getView(),
+        categoryBar(),
         Expanded(child: ui),
       ],
     );
+  }
+
+  Widget categoryBar() {
+    var ui = TabBar(
+      labelPadding: EdgeInsets.all(0),
+      tabs: categoryTabs,
+      controller: _tabController,
+      isScrollable: true,
+      indicatorColor: Colors.yellow,
+      indicatorSize: TabBarIndicatorSize.tab,
+      indicatorWeight: 3,
+
+      labelColor: ColorU.selectedColor,
+      /// 简单暴力的解决办法，左右间距根据上边间隔符的大小决定
+      //indicatorPadding: EdgeInsets.only(left: 15, bottom: 0.5, right: 15),
+      unselectedLabelColor: Colors.black,
+      labelStyle: TextStyle(fontSize: 16, color: Colors.black),
+    );
+    return ui;
   }
 
   Widget swiper() {

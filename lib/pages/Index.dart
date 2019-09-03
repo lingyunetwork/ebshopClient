@@ -1,4 +1,3 @@
-
 part of app;
 
 class IndexPage extends StatefulWidget {
@@ -19,46 +18,74 @@ class IndexPage extends StatefulWidget {
   createState() => _IndexPageState();
 }
 
-class _IndexPageState extends State<IndexPage> {
-  TabNav tab;
+class _IndexPageState extends State<IndexPage>
+    with SingleTickerProviderStateMixin,EStage {
+  List<Widget> pages = [];
+  List<BottomNavigationBarItem> bars = [];
+  // 页面控制
+  TabController _tabController;
 
   @override
   void initState() {
-    tab = TabNav();
+    addTabItem('首页', Icons.home,HomePage());
+    addTabItem('推荐', Icons.thumb_up, );
+    addTabItem('精选', Icons.av_timer);
+    addTabItem('购物车', Icons.shopping_cart);
+    addTabItem('个人中心', Icons.people, Personal());
 
-    tab.addEventListener(EventX.CHANGE,update);
-
-    final tabsVO = [
-      TabItemVO('首页', Icons.home,LoginPage()),
-      TabItemVO('推荐', Icons.thumb_up,HomePage()),
-      TabItemVO('精选', Icons.av_timer,LoginMobilePage()),
-      TabItemVO('购物车', Icons.shopping_cart),
-      TabItemVO('个人中心', Icons.people,Personal())
-    ];
-
-    for (var f in tabsVO) {
-      tab.add(f);
-    }
+    _tabController = TabController(length: bars.length, vsync: this);
+    _tabController.addListener(() {
+      invalidate();
+    });
 
     super.initState();
   }
 
-  update(EventX e){
+  addTabItem(String name, IconData icon, [Widget page]) {
+    var ui = BottomNavigationBarItem(
+        icon: Icon(icon),
+        activeIcon: Icon(
+          icon,
+          color: Colors.redAccent,
+        ),
+        title: Text(name));
+    bars.add(ui);
+
+    if (page == null) {
+      page = Center(child: Text("hello empty"));
+    }
+    pages.add(page);
+  }
+
+  // 底部栏切换
+  void _onBottomNavigationBarTap(int index) {
     setState(() {
-      
+      _tabController.index = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Container(
-      color: Colors.white,
-      child:SafeArea(bottom: false,child:tab.getView()));
+    Widget ui = Scaffold(
+      body: IndexedStack(
+        index: _tabController.index,
+        children: pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          items: bars,
+          onTap: _onBottomNavigationBarTap,
+          //图标大小
+          iconSize: 24,
+          //当前选中的索引
+          currentIndex: _tabController.index,
+          //选中后，底部BottomNavigationBar内容的颜色(选中时，默认为主题色)（仅当type: BottomNavigationBarType.fixed,时生效）
+          fixedColor: Colors.pinkAccent,
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12),
+    );
+
+    ui = SafeArea(bottom: false, child: ui);
+
+    return Container(color: Colors.white, child: ui);
   }
 }

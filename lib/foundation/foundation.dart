@@ -1,13 +1,14 @@
 library foundation;
 
 import 'dart:core';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 //core
 part 'core/EventDispatcher.dart';
 part 'core/EventX.dart';
 part 'core/MiEventX.dart';
-part 'core/Interface.dart';
+part 'core/Interf.dart';
 part 'structure/ActionNode.dart';
 part 'structure/Dictionary.dart';
 part 'structure/QueueAction.dart';
@@ -16,8 +17,10 @@ part 'structure/Signal.dart';
 part 'structure/SignalNode.dart';
 part 'structure/SimpleListPool.dart';
 part 'utils/DebugX.dart';
-part 'SocketX.dart';
+part 'utils/SocketX.dart';
+part 'utils/Ux.dart';
 
+part 'extentions/EState.dart';
 
 //mvc
 part 'mvc/core/View.dart';
