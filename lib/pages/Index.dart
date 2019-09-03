@@ -28,8 +28,8 @@ class _IndexPageState extends State<IndexPage>
   @override
   void initState() {
     addTabItem('首页', Icons.home,HomePage());
-    addTabItem('推荐', Icons.thumb_up, );
-    addTabItem('精选', Icons.av_timer);
+    addTabItem('推荐', Icons.thumb_up,LoginPage() );
+    addTabItem('精选', Icons.av_timer,LoginMobilePage());
     addTabItem('购物车', Icons.shopping_cart);
     addTabItem('个人中心', Icons.people, Personal());
 

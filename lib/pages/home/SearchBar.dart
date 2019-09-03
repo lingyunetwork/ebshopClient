@@ -11,13 +11,20 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        _Icon(),
+        getNewsIcon(),
         SizedBox(width: 10),
         Expanded(child: _SearchBar()),
         SizedBox(width: 10),
-        _IconCategory(),
+        getAllIcon(),
       ],
     );
+  }
+
+  Widget getAllIcon(){
+    return Icon(Icons.dashboard,color: Colors.grey,);
+  }
+  Widget getNewsIcon(){
+    return Icon(Icons.message,color: Colors.grey,);
   }
 }
 
@@ -39,37 +46,5 @@ class _SearchBar extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.grey[200],
             borderRadius: BorderRadius.all(Radius.circular(50))));
-  }
-}
-
-class _Icon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      Icon(Feather.message_square),
-      Text("消 息",
-          style: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontSize: 8,
-            fontFamily: "PingFang SC",
-            fontWeight: FontWeight.w600,
-          ))
-    ]);
-  }
-}
-
-class _IconCategory extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      Icon(Feather.bookmark),
-      Text("分 类",
-          style: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontSize: 8,
-            fontFamily: "PingFang SC",
-            fontWeight: FontWeight.w600,
-          ))
-    ]);
   }
 }

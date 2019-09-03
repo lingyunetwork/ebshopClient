@@ -35,7 +35,7 @@ dependencies:
   # Octicons 地址：https://octicons.github.com/
   # SimpleLineIcons 地址：https://simplelineicons.github.io/
   flutter_vector_icons: ^0.2.1
-  flutter_swiper: ^1.0.6
+  flutter_swiper: ^1.1.6
   cached_network_image: ^1.1.1
 
 dev_dependencies:

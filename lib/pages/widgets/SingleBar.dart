@@ -23,6 +23,7 @@ class SingleBar extends StatelessWidget {
     );
     //ui=Expanded(child: ui,);
     return Container(
+      padding: AppStyle.mainPaddingLR,
       height: 40,
       color: Colors.white,
       child: ui,

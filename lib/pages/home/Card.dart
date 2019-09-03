@@ -12,7 +12,7 @@ class _CardItemState extends State<CardItem> {
     Widget ui;
 
     var rng = new Random();
-    var index = rng.nextInt(100);
+    var index = rng.nextInt(5);
     Widget icon = CachedNetworkImage(
       width: Ux.px(375),
       height: Ux.px(200),
@@ -20,10 +20,6 @@ class _CardItemState extends State<CardItem> {
       errorWidget: (context, url, error) => new Icon(Icons.error),
       imageUrl: 'https://picsum.photos/250?image=$index',
       fit: BoxFit.fitWidth,
-    );
-    icon = Container(
-      //color: Colors.red,
-      child: icon,
     );
 
     var title = Text(

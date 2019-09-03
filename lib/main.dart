@@ -22,10 +22,8 @@ part 'pages/home/Card.dart';
 
 part 'pages/utils/Utils.dart';
 
-part 'delegate/search_bar_delegate.dart';
-part "res/colors.dart";
-part 'res/dimens.dart';
-part "res/styles.dart";
+part 'pages/delegate/search_bar_delegate.dart';
+part 'pages/delegate/SliverPersistentHeaderDelegate.dart';
 
 void main() => runApp(MyApp());
 

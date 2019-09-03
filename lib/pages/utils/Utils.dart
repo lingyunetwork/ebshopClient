@@ -21,14 +21,7 @@ class Util {
 
   static Tab getMinTab(String value) {
     var ui = Tab(
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Expanded(
-        child: Center(
-          child: Text(value),
-        ),
-      )
-    ]));
+        text: value,);
     return ui;
   }
 }
@@ -67,8 +60,18 @@ class TextU {
   }
 }
 
+class AppStyle{
+
+  AppStyle._();
+  static Widget defaultGap = SizedBox(width: Ux.px(10));
+  static EdgeInsetsGeometry defaultPadding=EdgeInsets.all(10);
+  static EdgeInsetsGeometry mainPaddingLR=EdgeInsets.only(left: 15,right: 15);
+
+
+}
 
 class ColorU{
 
   static Color selectedColor=Colors.redAccent;
+  static Color unselectedColor=Colors.grey;
 }
