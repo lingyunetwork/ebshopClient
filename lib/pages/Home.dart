@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     var list = <Widget>[
-      //swiper(),
+     
       category(),
       SingleBar(),
       CardItem(),
@@ -47,13 +47,6 @@ class _HomePageState extends State<HomePage>
     Widget ui = NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
-          SliverAppBar(
-            expandedHeight: 200,
-            pinned: true,
-            elevation: innerBoxIsScrolled ? 0 : 1,
-            title: Text("标题"),
-            flexibleSpace: swiper(),
-          ),
           SliverPersistentHeader(
             pinned: true,
             delegate: _SliverPersistentHeaderDelegate(TabBar(
@@ -61,8 +54,8 @@ class _HomePageState extends State<HomePage>
                 labelColor: Colors.blue,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
-                  Tab(icon: Icon(Icons.home), text: "tab1"),
-                  Tab(icon: Icon(Icons.person), text: "tab2"),
+                  Tab(text: "hello",),
+                  Tab(text: "world",),
                 ])),
           ),
         ];
@@ -74,6 +67,7 @@ class _HomePageState extends State<HomePage>
       children: <Widget>[
         SearchBar(),
         categoryBar(),
+         swiper(),
         Expanded(child: ui),
       ],
     );
@@ -90,6 +84,7 @@ class _HomePageState extends State<HomePage>
       indicatorWeight: 3,
 
       labelColor: ColorU.selectedColor,
+
       /// 简单暴力的解决办法，左右间距根据上边间隔符的大小决定
       //indicatorPadding: EdgeInsets.only(left: 15, bottom: 0.5, right: 15),
       unselectedLabelColor: Colors.black,
