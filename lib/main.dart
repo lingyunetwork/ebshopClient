@@ -15,6 +15,7 @@ part "pages/Index.dart";
 part 'pages/Persional.dart';
 part 'pages/register/Login.dart';
 part 'pages/register/LoginMobile.dart';
+part 'pages/register/LoginCode.dart';
 
 part 'pages/Home.dart';
 part 'pages/home/TopTabBar.dart';

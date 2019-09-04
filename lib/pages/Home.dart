@@ -96,6 +96,7 @@ class _HomePageState extends State<HomePage>
 
     return SliverPersistentHeader(
       pinned: true,
+      floating: false,
       delegate: header,
     );
   }

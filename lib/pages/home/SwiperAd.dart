@@ -37,10 +37,6 @@ class _SwiperAdState extends State<SwiperAd> with EStage{
     var vo=data[index];
     String url = vo.icon;
 
-    var rng = new Random();
-    var r = rng.nextInt(5);
-    url = 'https://picsum.photos/250?image=$r';
-
     Widget ui;
     if (url.indexOf("assets") == 0) {
       ui = Image.asset(url);

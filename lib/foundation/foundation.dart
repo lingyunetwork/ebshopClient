@@ -1,5 +1,6 @@
 library foundation;
 
+import 'dart:async';
 import 'dart:core';
 import 'dart:ui';
 import 'package:ebshop/main.dart';
@@ -20,6 +21,7 @@ part 'utils/SocketX.dart';
 part "utils/JsonUtils.dart";
 part "utils/DataProvider.dart";
 part 'utils/Ux.dart';
+part "utils/TimerUtil.dart";
 
 part 'extentions/EState.dart';
 

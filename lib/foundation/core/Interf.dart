@@ -1,14 +1,9 @@
 part of foundation;
 
-typedef void Action();
+typedef void Func();
 typedef void ActionT<T>(T o);
-typedef void ActionST<T>(String type,T o);
 
 typedef R Handle<T, R>(T o);
-typedef R Func<R>();
-
-typedef ClassT<T> =T Function();
-typedef Class = dynamic Function();
 
 enum NodeActiveState {
   ///正在运行;
