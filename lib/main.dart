@@ -19,12 +19,13 @@ part 'pages/register/LoginMobile.dart';
 part 'pages/Home.dart';
 part 'pages/home/TopTabBar.dart';
 part 'pages/home/SearchBar.dart';
-part 'pages/home/CategoryBar.dart';
+part 'pages/home/SubTabBar.dart';
 part 'pages/home/Card.dart';
+part 'pages/home/SwiperCategory.dart';
 
 
-part 'pages/widgets/SwiperDiy.dart';
-part 'pages/widgets/SwiperCategory.dart';
+part 'pages/home/SwiperAd.dart';
+
 part 'pages/widgets/SingleBar.dart';
 
 

@@ -1,14 +1,14 @@
 part of app;
 
-class SwiperDiy extends StatefulWidget {
+class SwiperAd extends StatefulWidget {
   final DataProvider dataProvider;
-  const SwiperDiy(this.dataProvider,{Key key}) : super(key: key);
+  const SwiperAd(this.dataProvider,{Key key}) : super(key: key);
 
   @override
-  _SwiperDiyState createState() => _SwiperDiyState();
+  _SwiperAdState createState() => _SwiperAdState();
 }
 
-class _SwiperDiyState extends State<SwiperDiy> with EStage{
+class _SwiperAdState extends State<SwiperAd> with EStage{
   List<MenuVO> data;
 
   @override

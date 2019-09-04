@@ -1,15 +1,15 @@
 part of app;
-class CategoryBar extends StatefulWidget {
+class SubTabBar extends StatefulWidget {
   final DataProvider dataProvider;
   final TickerProvider parentState;
   
-  const CategoryBar(this.dataProvider,this.parentState,{Key key}) : super(key: key);
+  const SubTabBar(this.dataProvider,this.parentState,{Key key}) : super(key: key);
 
   @override
-  _CategoryBarState createState() => _CategoryBarState();
+  _SubTabBarState createState() => _SubTabBarState();
 }
 
-class _CategoryBarState extends State<CategoryBar> {
+class _SubTabBarState extends State<SubTabBar> {
   TabController _controller;
   List<MenuVO> data;
   @override

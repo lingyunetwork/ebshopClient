@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage>
         SwiperCategory(
           value,
         ),
-        SwiperDiy(value),
+        SwiperAd(value),
       ],
     );
 
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget getSecondTabSlive(DataProvider value) {
-    Widget ui = CategoryBar(value, this);
+    Widget ui = SubTabBar(value, this);
     return SliverToBoxAdapter(
       child: ui,
     );
