@@ -9,4 +9,9 @@ abstract class EStage<T extends StatefulWidget> extends State<T>{
   _empty(){
 
   }
+
+
+  navigate(BuildContext context,MenuVO value) async{
+    
+  }
 }

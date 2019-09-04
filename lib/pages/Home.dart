@@ -9,26 +9,76 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with EStage, TickerProviderStateMixin {
   TabController _tabController;
-  List<Widget> categoryTabs;
+  Future future;
   @override
   void initState() {
-    categoryTabs = List();
-
-    for (var i = 0; i < 20; i++) {
-      var text = "美妆$i";
-      var tab = Util.getMinTab(text);
-      categoryTabs.add(tab);
-    }
-
-    _tabController = TabController(length: categoryTabs.length, vsync: this);
+    future = getdata();
     super.initState();
+  }
+
+  Future getdata() async {
+    var jsonData = await
+        DefaultAssetBundle.of(context).loadString("assets/json/Category.json");
+
+    var data = json.decode(jsonData.toString());
+
+    var create = MenuVO();
+    List<List<MenuVO>> list = [];
+
+    var tabs=Factory.fromJson(data, "tabMenu", create);
+    list.add(tabs);
+    list.add(Factory.fromJson(data, "iconMenu", create));
+    list.add(Factory.fromJson(data, "swipers", create));
+
+    _tabController=TabController(length:tabs.length,vsync: this,initialIndex: 0 );
+    return list;
+  }
+
+  //刷新数据,重新设置future就行了
+  Future refresh() async {
+    setState(() {
+      future = getdata();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var list = <Widget>[
-      swiper(),
-      category(),
+    return FutureBuilder(
+      future: future,
+      builder: onDataReady,
+    );
+  }
+
+  Widget onDataReady(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+    if (snapshot.connectionState == ConnectionState.active ||
+        snapshot.connectionState == ConnectionState.waiting) {
+      return new Center(
+        child: new CircularProgressIndicator(),
+      );
+    }
+    if (snapshot.connectionState == ConnectionState.done) {
+      if (snapshot.hasError) {
+        return new Center(
+          child: new Text("ERROR"),
+        );
+      }
+
+      if(snapshot.hasData==false){
+         return new Center(
+          child: new Text("NONDATA"),
+        );
+      }
+    }
+
+
+    var data = snapshot.data as List<List<MenuVO>>;
+    var tabMenuList = data[0];
+    var iconMenuList = data[1];
+    var swipersList = data[2];
+
+    var listBody = <Widget>[
+      SwiperDiy(swipersList),
+      SwiperCategory(iconMenuList,),
       SingleBar(),
       CardItem(),
       CardItem(),
@@ -37,8 +87,14 @@ class _HomePageState extends State<HomePage>
       CardItem(),
     ];
 
-    Widget headerUI = Column(children: <Widget>[SearchBar(), categoryBar()]);
-    headerUI=Container(padding: AppStyle.mainPaddingLR,child: headerUI,);
+    Widget headerUI = Column(children: <Widget>[
+      SearchBar(),
+      CategoryBar(tabMenuList,_tabController)
+    ]);
+    headerUI = Container(
+      padding: AppStyle.mainPaddingLR,
+      child: headerUI,
+    );
     var header = SliverPersistentHeaderDelegateEx(headerUI);
     header.maxHeight = 93;
     header.minHeight = 93;
@@ -52,65 +108,8 @@ class _HomePageState extends State<HomePage>
           ),
         ];
       },
-      body: ListView(children: list),
-    );
-
-    return ui;
-  }
-
-  Widget categoryBar() {
-    var ui = TabBar(
-      labelPadding: EdgeInsets.only(right: 10),
-      tabs: categoryTabs,
-      controller: _tabController,
-      isScrollable: true,
-      indicatorColor: Colors.yellow,
-      indicatorSize: TabBarIndicatorSize.label,
-      indicatorWeight: 5,
-      labelColor: ColorU.selectedColor,
-
-      /// 简单暴力的解决办法，左右间距根据上边间隔符的大小决定
-      //indicatorPadding: EdgeInsets.only(left: 15, bottom: 0.5, right: 15),
-      unselectedLabelColor: ColorU.unselectedColor,
+      body: ListView(children: listBody),
     );
     return ui;
-  }
-
-  Widget swiper() {
-    var list = <Map>[];
-
-    for (var i = 0; i < 5; i++) {
-      var map = <String, dynamic>{};
-      map["image"] = "assets/test/timg-2.png";
-
-      list.add(map);
-    }
-
-    return SwiperDiy(
-      data: list,
-    );
-  }
-
-  Widget category() {
-    var list = [];
-
-    for (var i = 0; i < 2; i++) {
-      var t = [];
-      for (var i = 0; i < 10; i++) {
-        var map = <String, dynamic>{};
-        map["title"] = "a";
-        map["icon"] = Icons.home;
-
-        t.add(map);
-      }
-
-      list.add(t);
-    }
-
-    return SwiperCategory(
-      data: list,
-    );
   }
 }
-
-singleBar() {}

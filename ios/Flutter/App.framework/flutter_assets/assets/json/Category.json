@@ -1,0 +1,208 @@
+{
+    "tabMenu": [
+        {
+            "name": "美妆1",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆2",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆3",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆4",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆5",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆6",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆7",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆8",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆9",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆10",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆11",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美妆12",
+            "type": 1,
+            "url": ""
+        }
+    ],
+    "iconMenu": [
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-2.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-3.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-4.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-5.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-6.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-7.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-8.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-9.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-10.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-11.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-12.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-13.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-14.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-15.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-16.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-17.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-18.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-19.png",
+            "type": 1,
+            "url": ""
+        },
+        {
+            "name": "美测试",
+            "icon": "asset/images/image-20.png",
+            "type": 1,
+            "url": ""
+        }
+    ],
+
+    "swipers":[
+        {
+            "name": "美妆1",
+            "icon": "asset/images/image-10.png",
+            "url": ""
+        },
+        {
+            "name": "美妆1",
+            "icon": "asset/images/image-10.png",
+            "url": ""
+        },
+        {
+            "name": "美妆1",
+            "icon": "asset/images/image-10.png",
+            "url": ""
+        },
+        {
+            "name": "美妆1",
+            "icon": "asset/images/image-10.png",
+            "url": ""
+        },
+        {
+            "name": "美妆1",
+            "icon": "asset/images/image-10.png",
+            "url": ""
+        }
+    ]
+}

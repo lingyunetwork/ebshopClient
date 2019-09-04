@@ -1,8 +1,20 @@
 part of app;
 
-class SwiperCategory extends StatelessWidget {
-  final List data;
-  const SwiperCategory({Key key, this.data}) : super(key: key);
+class SwiperCategory extends StatefulWidget {
+  final List<MenuVO> dataProvider;
+  const SwiperCategory(this.dataProvider, {Key key}) : super(key: key);
+
+  @override
+  _SwiperCategoryState createState() => _SwiperCategoryState();
+}
+
+class _SwiperCategoryState extends State<SwiperCategory> {
+  List<Widget> navigatorList;
+  @override
+  void initState() {
+    navigatorList = List();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,34 +31,33 @@ class SwiperCategory extends StatelessWidget {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    List navigatorList = data[index];
-    List<Widget> c = navigatorList.map(
-      (item) {
-        return _getItem(context, item);
-      },
-    ).toList();
+    navigatorList.clear();
+    for (var i = 0; i < 10; i++) {
+      var item = widget.dataProvider[index * 10 + i];
+      if (item != null) {
+        navigatorList.add(_getItem(context, item));
+      }
+    }
 
     return GridView.count(
-      padding: EdgeInsets.only(top:10),
+      padding: EdgeInsets.only(top: 10),
       mainAxisSpacing: 0,
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 5,
-      children: c,
+      children: navigatorList,
     );
   }
 
-  Widget _getItem(BuildContext context, Map data) {
-    //var url = data['image'];
-    //var title=data["title"];
-    //var icon=Image.network(url,fit: BoxFit.fill,);
+  Widget _getItem(BuildContext context, MenuVO value) {
+    //var icon=Image.network(value.icon,fit: BoxFit.fill,);
 
     var ui = Container(
-      height: 62,
-      //color: Colors.red,
+        height: 62,
+        //color: Colors.red,
         child: Column(children: <Widget>[
-          Expanded(child:Icon(Feather.message_square)),
+          Expanded(child: Icon(Feather.message_square)),
           TextU.getDef(
-            "消 息",
+            value.name,
           )
         ]));
 

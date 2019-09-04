@@ -1,5 +1,6 @@
 library app;
 
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -9,18 +10,25 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:ebshop/foundation/foundation.dart';
 
 part "pages/Index.dart";
-part 'pages/Home.dart';
+
+
 part 'pages/Persional.dart';
 part 'pages/register/Login.dart';
 part 'pages/register/LoginMobile.dart';
+
+part 'pages/Home.dart';
 part 'pages/home/SearchBar.dart';
+part 'pages/home/CategoryBar.dart';
+part 'pages/home/Card.dart';
+
 
 part 'pages/widgets/SwiperDiy.dart';
 part 'pages/widgets/SwiperCategory.dart';
 part 'pages/widgets/SingleBar.dart';
-part 'pages/home/Card.dart';
+
 
 part 'pages/utils/Utils.dart';
+part "pages/vos/vos.dart";
 
 part 'pages/delegate/search_bar_delegate.dart';
 part 'pages/delegate/SliverPersistentHeaderDelegate.dart';
@@ -50,6 +58,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: IndexPage(title: 'Flutter Demo Home Page'),
+
+      debugShowCheckedModeBanner: true,
     );
   }
 }

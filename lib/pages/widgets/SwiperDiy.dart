@@ -1,20 +1,20 @@
 part of app;
 
 class SwiperDiy extends StatefulWidget {
-  final List data;
-  const SwiperDiy({Key key, this.data}) : super(key: key);
+  final List<MenuVO> dataProvider;
+  const SwiperDiy(this.dataProvider,{Key key}) : super(key: key);
 
   @override
   _SwiperDiyState createState() => _SwiperDiyState();
 }
 
-class _SwiperDiyState extends State<SwiperDiy> {
+class _SwiperDiyState extends State<SwiperDiy> with EStage{
   @override
   Widget build(BuildContext context) {
     Widget ui;
     ui = Swiper(
       itemBuilder: _itemBuilder,
-      itemCount: widget.data.length,
+      itemCount: widget.dataProvider.length,
       pagination: new SwiperPagination(),
       scale: 1.0,
       autoplay: true,
@@ -25,7 +25,8 @@ class _SwiperDiyState extends State<SwiperDiy> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    String url = widget.data[index]['image'];
+    var vo=widget.dataProvider[index];
+    String url = vo.icon;
 
     var rng = new Random();
     var r = rng.nextInt(5);
@@ -43,7 +44,9 @@ class _SwiperDiyState extends State<SwiperDiy> {
       );
     }
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        navigate(context, vo);
+      },
       child: ui,
     );
   }
