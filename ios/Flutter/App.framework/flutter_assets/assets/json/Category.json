@@ -194,27 +194,27 @@
     "swipers": [
         {
             "name": "美妆1",
-            "icon": "assets/images/image-10.png",
+            "icon": "https://picsum.photos/250?image=1",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "assets/images/image-10.png",
+            "icon": "https://picsum.photos/250?image=2",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "assets/images/image-10.png",
+            "icon": "https://picsum.photos/250?image=3",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "assets/images/image-10.png",
+            "icon": "https://picsum.photos/250?image=4",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "assets/images/image-10.png",
+            "icon": "https://picsum.photos/250?image=5",
             "url": ""
         }
     ]

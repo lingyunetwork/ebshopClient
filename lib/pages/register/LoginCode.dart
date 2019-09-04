@@ -6,15 +6,15 @@ class LoginCode extends StatefulWidget {
   final int countdown;
 
   /// 用户点击时的回调函数。
-  Func onTapCallback;
+  final Func onTapCallback;
 
   /// 是否可以获取验证码，默认为`false`。
   final bool available;
 
   LoginCode({
-    this.countdown=60,
+    this.countdown:60,
     this.onTapCallback,
-    this.available: false,
+    this.available:false,
   });
 
   @override
