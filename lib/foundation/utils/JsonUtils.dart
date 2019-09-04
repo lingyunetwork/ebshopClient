@@ -5,10 +5,9 @@ abstract class IFromJSON<T> {
 }
 
 class Factory {
-  static List<T> fromJson<T>(Map value,String key,IFromJSON<T> creater) {
+  static List<T> fromJson<T>(List<dynamic> value,IFromJSON<T> creater) {
     List<T> list=List();
-    var datas=value[key];
-    for (var item in datas) {
+    for (var item in value) {
       list.add(creater.newFromJSON(item));
     }
     return list;

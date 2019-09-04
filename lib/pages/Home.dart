@@ -8,30 +8,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with EStage, TickerProviderStateMixin {
-  TabController _tabController;
-  Future future;
+  Future<DataProvider> future;
   @override
   void initState() {
     future = getdata();
     super.initState();
   }
 
-  Future getdata() async {
-    var jsonData = await
-        DefaultAssetBundle.of(context).loadString("assets/json/Category.json");
+  Future<DataProvider> getdata() async {
+    var jsonData = await DefaultAssetBundle.of(context)
+        .loadString("assets/json/Category.json");
 
     var data = json.decode(jsonData.toString());
 
     var create = MenuVO();
-    List<List<MenuVO>> list = [];
+    var provider = DataProvider();
 
-    var tabs=Factory.fromJson(data, "tabMenu", create);
-    list.add(tabs);
-    list.add(Factory.fromJson(data, "iconMenu", create));
-    list.add(Factory.fromJson(data, "swipers", create));
-
-    _tabController=TabController(length:tabs.length,vsync: this,initialIndex: 0 );
-    return list;
+    data.forEach((key, value) {
+      var list = Factory.fromJson(value, create);
+      provider.add(key, list);
+    });
+    return provider;
   }
 
   //刷新数据,重新设置future就行了
@@ -49,7 +46,8 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget onDataReady(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+  Widget onDataReady(
+      BuildContext context, AsyncSnapshot<DataProvider> snapshot) {
     if (snapshot.connectionState == ConnectionState.active ||
         snapshot.connectionState == ConnectionState.waiting) {
       return new Center(
@@ -63,53 +61,92 @@ class _HomePageState extends State<HomePage>
         );
       }
 
-      if(snapshot.hasData==false){
-         return new Center(
+      if (snapshot.hasData == false) {
+        return new Center(
           child: new Text("NONDATA"),
         );
       }
     }
 
 
-    var data = snapshot.data as List<List<MenuVO>>;
-    var tabMenuList = data[0];
-    var iconMenuList = data[1];
-    var swipersList = data[2];
-
     var listBody = <Widget>[
-      SwiperDiy(swipersList),
-      SwiperCategory(iconMenuList,),
       SingleBar(),
       CardItem(),
       CardItem(),
       CardItem(),
+      SingleBar(),
       CardItem(),
       CardItem(),
     ];
+    var data = snapshot.data;
+    Widget ui = NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          getTopSliver(data),
+          getSwiperSlive(data),
+          getSecondTabSlive(data),
+          //getLastListSlive(data),
+        ];
+      },
+      body: ListView(children: listBody),
+    );
+    return ui;
+  }
 
+  Widget getTopSliver(DataProvider value) {
     Widget headerUI = Column(children: <Widget>[
+      TopTabBar(value, this),
       SearchBar(),
-      CategoryBar(tabMenuList,_tabController)
     ]);
     headerUI = Container(
       padding: AppStyle.mainPaddingLR,
       child: headerUI,
     );
     var header = SliverPersistentHeaderDelegateEx(headerUI);
-    header.maxHeight = 93;
-    header.minHeight = 93;
+    header.maxHeight = 90;
+    header.minHeight = 90;
 
-    Widget ui = NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return <Widget>[
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: header,
-          ),
-        ];
-      },
-      body: ListView(children: listBody),
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: header,
     );
-    return ui;
+  }
+
+  Widget getSwiperSlive(DataProvider value) {
+    Widget ui = Column(
+      children: <Widget>[
+        SwiperCategory(
+          value,
+        ),
+        SwiperDiy(value),
+      ],
+    );
+
+    return SliverToBoxAdapter(
+      child: ui,
+    );
+  }
+
+  Widget getSecondTabSlive(DataProvider value) {
+    Widget ui = CategoryBar(value, this);
+    return SliverToBoxAdapter(
+      child: ui,
+    );
+  }
+
+  Widget getLastListSlive(DataProvider value){
+ var listBody = <Widget>[
+      SingleBar(),
+      CardItem(),
+      CardItem(),
+      CardItem(),
+      SingleBar(),
+      CardItem(),
+      CardItem(),
+    ];
+
+    return SliverToBoxAdapter(
+      child:ListView(children: listBody),
+    );
   }
 }

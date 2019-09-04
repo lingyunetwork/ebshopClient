@@ -18,6 +18,7 @@ part 'structure/SimpleListPool.dart';
 part 'utils/DebugX.dart';
 part 'utils/SocketX.dart';
 part "utils/JsonUtils.dart";
+part "utils/DataProvider.dart";
 part 'utils/Ux.dart';
 
 part 'extentions/EState.dart';

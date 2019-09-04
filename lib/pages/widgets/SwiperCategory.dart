@@ -1,7 +1,7 @@
 part of app;
 
 class SwiperCategory extends StatefulWidget {
-  final List<MenuVO> dataProvider;
+  final DataProvider dataProvider;
   const SwiperCategory(this.dataProvider, {Key key}) : super(key: key);
 
   @override
@@ -10,8 +10,10 @@ class SwiperCategory extends StatefulWidget {
 
 class _SwiperCategoryState extends State<SwiperCategory> {
   List<Widget> navigatorList;
+  List<MenuVO> data;
   @override
   void initState() {
+    data=widget.dataProvider.get("iconMenu");
     navigatorList = List();
     super.initState();
   }
@@ -33,7 +35,7 @@ class _SwiperCategoryState extends State<SwiperCategory> {
   Widget _itemBuilder(BuildContext context, int index) {
     navigatorList.clear();
     for (var i = 0; i < 10; i++) {
-      var item = widget.dataProvider[index * 10 + i];
+      var item = data[index * 10 + i];
       if (item != null) {
         navigatorList.add(_getItem(context, item));
       }

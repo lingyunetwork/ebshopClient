@@ -1,7 +1,7 @@
 part of app;
 
 class SwiperDiy extends StatefulWidget {
-  final List<MenuVO> dataProvider;
+  final DataProvider dataProvider;
   const SwiperDiy(this.dataProvider,{Key key}) : super(key: key);
 
   @override
@@ -9,12 +9,21 @@ class SwiperDiy extends StatefulWidget {
 }
 
 class _SwiperDiyState extends State<SwiperDiy> with EStage{
+  List<MenuVO> data;
+
+  @override
+  void initState() { 
+    super.initState();
+    data=widget.dataProvider.get("swipers");
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Widget ui;
     ui = Swiper(
       itemBuilder: _itemBuilder,
-      itemCount: widget.dataProvider.length,
+      itemCount: data.length,
       pagination: new SwiperPagination(),
       scale: 1.0,
       autoplay: true,
@@ -25,7 +34,7 @@ class _SwiperDiyState extends State<SwiperDiy> with EStage{
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    var vo=widget.dataProvider[index];
+    var vo=data[index];
     String url = vo.icon;
 
     var rng = new Random();

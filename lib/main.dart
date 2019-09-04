@@ -17,6 +17,7 @@ part 'pages/register/Login.dart';
 part 'pages/register/LoginMobile.dart';
 
 part 'pages/Home.dart';
+part 'pages/home/TopTabBar.dart';
 part 'pages/home/SearchBar.dart';
 part 'pages/home/CategoryBar.dart';
 part 'pages/home/Card.dart';
