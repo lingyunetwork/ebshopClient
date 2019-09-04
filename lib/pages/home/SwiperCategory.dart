@@ -8,12 +8,12 @@ class SwiperCategory extends StatefulWidget {
   _SwiperCategoryState createState() => _SwiperCategoryState();
 }
 
-class _SwiperCategoryState extends State<SwiperCategory> {
+class _SwiperCategoryState extends State<SwiperCategory> with EStage {
   List<Widget> navigatorList;
   List<MenuVO> data;
   @override
   void initState() {
-    data=widget.dataProvider.get("iconMenu");
+    data = widget.dataProvider.get("iconMenu");
     navigatorList = List();
     super.initState();
   }
@@ -42,7 +42,7 @@ class _SwiperCategoryState extends State<SwiperCategory> {
     }
 
     return GridView.count(
-      padding: EdgeInsets.only(top: 10),
+      //padding: AppStyle.mainPaddingLR,
       mainAxisSpacing: 0,
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 5,
@@ -54,17 +54,25 @@ class _SwiperCategoryState extends State<SwiperCategory> {
     //var icon=Image.network(value.icon,fit: BoxFit.fill,);
 
     var ui = Container(
-        height: 62,
+        height: 80,
+        width: 90,
         //color: Colors.red,
         child: Column(children: <Widget>[
-          Expanded(child: Icon(Feather.message_square)),
-          TextU.getDef(
+          Expanded(child: Image.asset(value.icon)),
+          Text(
             value.name,
-          )
+            style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+                fontWeight: FontWeight.normal),
+                softWrap:false,
+          ),
         ]));
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        navigate(context, value);
+      },
       child: Center(child: ui),
     );
   }

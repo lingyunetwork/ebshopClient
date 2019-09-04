@@ -73,120 +73,120 @@
     "iconMenu": [
         {
             "name": "面部轮廓",
-            "icon": "asset/images/image-12.png",
+            "icon": "assets/images/image-12.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "玻尿酸",
-            "icon": "asset/images/image-13.png",
+            "icon": "assets/images/image-13.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "除皱瘦脸",
-            "icon": "asset/images/image-14.png",
+            "icon": "assets/images/image-14.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "眼部",
-            "icon": "asset/images/image-15.png",
+            "icon": "assets/images/image-15.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "鼻部",
-            "icon": "asset/images/image-16.png",
+            "icon": "assets/images/image-16.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "脂肪填充",
-            "icon": "asset/images/image-17.png",
+            "icon": "assets/images/image-17.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "生活美容",
-            "icon": "asset/images/image-18.png",
+            "icon": "assets/images/image-18.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "胸部",
-            "icon": "asset/images/image-19.png",
+            "icon": "assets/images/image-19.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "美体塑形",
-            "icon": "asset/images/image-20.png",
+            "icon": "assets/images/image-20.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "口腔齿科",
-            "icon": "asset/images/image-20.png",
+            "icon": "assets/images/image-20.png",
             "type": 1,
             "url": ""
         }, {
             "name": "抗衰紧致",
-            "icon": "asset/images/image-2.png",
+            "icon": "assets/images/image-2.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "医学美肤",
-            "icon": "asset/images/image-3.png",
+            "icon": "assets/images/image-3.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "毛发种植",
-            "icon": "asset/images/image-4.png",
+            "icon": "assets/images/image-4.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "半永久妆",
-            "icon": "asset/images/image-5.png",
+            "icon": "assets/images/image-5.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "补水美白",
-            "icon": "asset/images/image-6.png",
+            "icon": "assets/images/image-6.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "小V脸",
-            "icon": "asset/images/image-7.png",
+            "icon": "assets/images/image-7.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "私密整形",
-            "icon": "asset/images/image-8.png",
+            "icon": "assets/images/image-8.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "唇部整形",
-            "icon": "asset/images/image-9.png",
+            "icon": "assets/images/image-9.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "失败修复",
-            "icon": "asset/images/image-10.png",
+            "icon": "assets/images/image-10.png",
             "type": 1,
             "url": ""
         },
         {
             "name": "全部",
-            "icon": "asset/images/image-11.png",
+            "icon": "assets/images/image-11.png",
             "type": 1,
             "url": ""
         }
@@ -194,27 +194,27 @@
     "swipers": [
         {
             "name": "美妆1",
-            "icon": "asset/images/image-10.png",
+            "icon": "assets/images/image-10.png",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "asset/images/image-10.png",
+            "icon": "assets/images/image-10.png",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "asset/images/image-10.png",
+            "icon": "assets/images/image-10.png",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "asset/images/image-10.png",
+            "icon": "assets/images/image-10.png",
             "url": ""
         },
         {
             "name": "美妆1",
-            "icon": "asset/images/image-10.png",
+            "icon": "assets/images/image-10.png",
             "url": ""
         }
     ]

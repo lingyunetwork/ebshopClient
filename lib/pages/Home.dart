@@ -68,27 +68,15 @@ class _HomePageState extends State<HomePage>
       }
     }
 
-
-    var listBody = <Widget>[
-      SingleBar(),
-      CardItem(),
-      CardItem(),
-      CardItem(),
-      SingleBar(),
-      CardItem(),
-      CardItem(),
-    ];
     var data = snapshot.data;
-    Widget ui = NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return <Widget>[
-          getTopSliver(data),
-          getSwiperSlive(data),
-          getSecondTabSlive(data),
-          //getLastListSlive(data),
-        ];
-      },
-      body: ListView(children: listBody),
+    Widget ui = CustomScrollView(
+      slivers: <Widget>[
+        getTopSliver(data),
+        getSwiperSlive(data),
+        getSecondTabSlive(data),
+        getLastTitleSlive(data),
+        getLastListSlive(data)
+      ],
     );
     return ui;
   }
@@ -129,24 +117,37 @@ class _HomePageState extends State<HomePage>
 
   Widget getSecondTabSlive(DataProvider value) {
     Widget ui = SubTabBar(value, this);
+    var header = SliverPersistentHeaderDelegateEx(ui);
+    header.maxHeight = 40;
+    header.minHeight = 40;
+
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: header,
+    );
+  }
+
+  Widget getLastTitleSlive(DataProvider value) {
+    Widget ui = SingleBar();
     return SliverToBoxAdapter(
       child: ui,
     );
   }
 
-  Widget getLastListSlive(DataProvider value){
- var listBody = <Widget>[
-      SingleBar(),
-      CardItem(),
-      CardItem(),
-      CardItem(),
-      SingleBar(),
-      CardItem(),
-      CardItem(),
-    ];
-
-    return SliverToBoxAdapter(
-      child:ListView(children: listBody),
+  Widget getLastListSlive(DataProvider value) {
+    var ui = SliverFixedExtentList(
+      itemExtent: 50.0,
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.lightBlue[100 * (index % 9)],
+            child: Text('list item $index'),
+          );
+        },
+      ),
     );
+
+    return ui;
   }
 }
