@@ -17,8 +17,13 @@ class RECT{
   }
 
   static Future<HttpJsonResult> get(String uri,
-      dynamic data]) async {
-    Response response = await Dio().get("$gateAPI/$uri", queryParameters: data);
+      [String id]) async {
+
+    var query;
+    if(id!=null){
+      query={"id":id};
+    }    
+    Response response = await Dio().get("$gateAPI/$uri", queryParameters:query);
     return _getHttpJsonResult(response);
   }
 
@@ -28,7 +33,7 @@ class RECT{
   }
 
   static Future<HttpJsonResult> delete(String uri, String id) async {
-    Response response = await Dio().delete("$gateAPI/$uri", data: {id: id});
+    Response response = await Dio().delete("$gateAPI/$uri", data: {"id": id});
     return _getHttpJsonResult(response);
   }
 

@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ebshop/pages/signin/SignIn.dart';
+import 'package:ebshop/pages/post/PostArticlePage.dart';
 import 'package:ebshop/pages/splash/Splash.dart';
 import 'package:ebshop/pages/widgets/DotSwiperPaginationBuilderE.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ part 'pages/home/SwiperCategory.dart';
 part 'pages/home/SwiperAd.dart';
 
 part 'pages/widgets/SingleBar.dart';
-
+part 'pages/widgets/FromItem.dart';
 
 part 'pages/utils/Utils.dart';
 part "pages/vos/vos.dart";
@@ -57,7 +57,7 @@ class App extends StatelessWidget {
 
       routes: {
         '/MainPage': (ctx) => IndexPage(),
-        '/LoginPage': (ctx) => SigninPage(),
+        '/LoginPage': (ctx) => PostArticlePage(),
       },
       home:SplashPage(),
 

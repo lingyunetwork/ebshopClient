@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:ebshop/foundation/foundation.dart';
 import 'package:ebshop/pages/utils/Core.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +119,7 @@ class _SigninPageState extends State<SigninPage> with EStage {
         // contentPadding: EdgeInsets.only(
           //   left: 10,
           // ),
-          //border: InputBorder.none,
+          border: InputBorder.none,
           suffixIcon: IconButton(
               icon: Icon(Icons.clear),
               onPressed: () {
