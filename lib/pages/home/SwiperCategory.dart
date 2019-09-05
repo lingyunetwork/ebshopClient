@@ -25,7 +25,7 @@ class _SwiperCategoryState extends State<SwiperCategory> with EStage {
         child: Swiper(
           itemBuilder: _itemBuilder,
           itemCount: 2,
-          pagination: new SwiperPagination(),
+          pagination: new SwiperPagination(builder:DotSwiperPaginationBuilderE()),
           autoplay: false,
           loop: false,
         ));

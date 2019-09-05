@@ -71,7 +71,5 @@ class AppStyle{
 }
 
 class ColorU{
-
-  static Color selectedColor=Colors.redAccent;
   static Color unselectedColor=Colors.grey;
 }

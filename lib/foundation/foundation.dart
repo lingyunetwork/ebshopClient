@@ -20,11 +20,12 @@ part 'structure/SignalNode.dart';
 part 'structure/SimpleListPool.dart';
 part 'utils/DebugX.dart';
 part 'utils/SocketX.dart';
-part "utils/JsonUtils.dart";
+part "utils/ObjectUtil.dart";
 part "utils/DataProvider.dart";
 part 'utils/Ux.dart';
 part "utils/TimerUtil.dart";
 part "utils/ValidateUtil.dart";
 
 part 'extentions/EState.dart';
+part 'extentions/HttpJsonResult.dart';
 
