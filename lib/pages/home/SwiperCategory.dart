@@ -9,19 +9,18 @@ class SwiperCategory extends StatefulWidget {
 }
 
 class _SwiperCategoryState extends State<SwiperCategory> with EStage {
-  List<Widget> navigatorList;
   List<MenuVO> data;
   @override
   void initState() {
     data = widget.dataProvider.get("iconMenu");
-    navigatorList = List();
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 200,
+        height: 180,
         color: Colors.white,
         child: Swiper(
           itemBuilder: _itemBuilder,
@@ -33,7 +32,7 @@ class _SwiperCategoryState extends State<SwiperCategory> with EStage {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    navigatorList.clear();
+    List<Widget> navigatorList = List();
     for (var i = 0; i < 10; i++) {
       var item = data[index * 10 + i];
       if (item != null) {
@@ -41,9 +40,9 @@ class _SwiperCategoryState extends State<SwiperCategory> with EStage {
       }
     }
 
-    return GridView.count(
+    return  GridView.count(
       //padding: AppStyle.mainPaddingLR,
-      mainAxisSpacing: 0,
+      mainAxisSpacing: 10,
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 5,
       children: navigatorList,
@@ -54,9 +53,7 @@ class _SwiperCategoryState extends State<SwiperCategory> with EStage {
     //var icon=Image.network(value.icon,fit: BoxFit.fill,);
 
     var ui = Container(
-        height: 80,
-        width: 90,
-        //color: Colors.red,
+        //color: Colors.redAccent,
         child: Column(children: <Widget>[
           Expanded(child: Image.asset(value.icon)),
           Text(

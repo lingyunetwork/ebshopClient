@@ -31,7 +31,7 @@ class _IndexPageState extends State<IndexPage>
     addTabItem('推荐', Icons.thumb_up,LoginPage() );
     addTabItem('精选', Icons.av_timer,LoginMobilePage());
     addTabItem('购物车', Icons.shopping_cart);
-    addTabItem('个人中心', Icons.people, Personal());
+    addTabItem('个人中心', Icons.people,Personal());
 
     _tabController = TabController(length: bars.length, vsync: this);
     _tabController.addListener(() {
@@ -67,10 +67,7 @@ class _IndexPageState extends State<IndexPage>
   @override
   Widget build(BuildContext context) {
     Widget ui = Scaffold(
-      body: IndexedStack(
-        index: _tabController.index,
-        children: pages,
-      ),
+      body: pages[_tabController.index],
       bottomNavigationBar: BottomNavigationBar(
           items: bars,
           onTap: _onBottomNavigationBarTap,

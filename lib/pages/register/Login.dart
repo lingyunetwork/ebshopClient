@@ -9,6 +9,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with EStage {
   var _controller = new TextEditingController();
+  var _codeController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,14 +17,20 @@ class _LoginPageState extends State<LoginPage> with EStage {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           actions: <Widget>[
-            FlatButton(onPressed: onjump, child: a()),
+            FlatButton(onPressed: onjump, child: doNext()),
           ],
         ),
         body: Container(
             margin: EdgeInsets.only(left: 30, right: 30),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[b(), inputPhone(), d(), e(), f()])));
+                children: <Widget>[
+                  welcome(),
+                  inputPhone(),
+                  sendButton(),
+                  otherTitle(),
+                  other()
+                ])));
   }
 
   onjump() {}
@@ -33,7 +40,7 @@ class _LoginPageState extends State<LoginPage> with EStage {
     this.invalidate();
   }
 
-  a() {
+  doNext() {
     Widget ui = Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -47,7 +54,7 @@ class _LoginPageState extends State<LoginPage> with EStage {
     return ui;
   }
 
-  b() {
+  welcome() {
     Widget ui = Text("欢迎来到平台\n请您登陆/注册", style: TextStyle(fontSize: 35));
     ui = Container(
       child: ui,
@@ -58,23 +65,36 @@ class _LoginPageState extends State<LoginPage> with EStage {
 
   inputPhone() {
     Widget ui =
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
       Container(
-          child: Text(
-        "+86",
-        maxLines: 1,
-      )),
-      Icon(Icons.keyboard_arrow_down),
+        width: 60,
+        child: Row(
+          children: <Widget>[
+            Text(
+              "+86",
+              maxLines: 1,
+            ),
+            Icon(Icons.keyboard_arrow_down),
+          ],
+        ),
+      ),
       Expanded(
-          child: TextField(
+          child: TextFormField(
+              inputFormatters: <TextInputFormatter>[
+            LengthLimitingTextInputFormatter(11),
+            WhitelistingTextInputFormatter.digitsOnly,
+            BlacklistingTextInputFormatter.singleLineFormatter,
+          ],
               controller: _controller,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                   hintText: "电话号码",
-                  contentPadding: EdgeInsets.all(0),
+                  contentPadding: EdgeInsets.only(
+                    left: 10,
+                  ),
                   border: InputBorder.none,
                   suffixIcon: IconButton(
-                      icon: Icon(Icons.remove),
+                      icon: Icon(Icons.clear),
                       onPressed: () {
                         _controller.clear();
                       })),
@@ -88,22 +108,77 @@ class _LoginPageState extends State<LoginPage> with EStage {
               maxLengthEnforced: true,
               autocorrect: false,
               autofocus: true,
-              onSubmitted: onSubmitted,
+              onFieldSubmitted: onSubmitted,
+              onChanged: (v) => this.invalidate()))
+    ]);
+
+    var phone = Container(
+      height: 30,
+      child: ui,
+      margin: EdgeInsets.only(top: 30),
+    );
+
+    return phone;
+
+    return Column(
+      children: <Widget>[phone, phoneCode()],
+    );
+  }
+
+  phoneCode() {
+    Widget ui =
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+      SizedBox(width: 60),
+      Expanded(
+          child: TextFormField(
+              inputFormatters: <TextInputFormatter>[
+            LengthLimitingTextInputFormatter(8),
+            WhitelistingTextInputFormatter.digitsOnly,
+            BlacklistingTextInputFormatter.singleLineFormatter,
+          ],
+              controller: _codeController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  hintText: "验证码",
+                  contentPadding: EdgeInsets.only(
+                    left: 10,
+                  ),
+                  border: InputBorder.none,
+                  suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _codeController.clear();
+                      })),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              //maxLength: 11,
+              maxLengthEnforced: true,
+              autocorrect: false,
+              autofocus: true,
+              onFieldSubmitted: onSubmitted,
               onChanged: (v) => this.invalidate()))
     ]);
 
     ui = Container(
+      height: 30,
       child: ui,
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 30,bottom: 30),
     );
+
     return ui;
   }
 
-  d() {
+  sendButton() {
     var onPress = null;
-    if (this._controller.text.length > 0) {
+
+    var text=_controller.text;
+    if (ValidateUtil.isPoneAvailable(text)) {
       onPress = () {
-        onSubmitted(this._controller.text);
+        onSubmitted(text);
       };
     }
     Widget ui = Container(
@@ -132,16 +207,15 @@ class _LoginPageState extends State<LoginPage> with EStage {
     return ui;
   }
 
-  e() {
+  otherTitle() {
     var ui = Container(
         margin: EdgeInsets.only(top: 120),
-        child: Text("其它登陆方式",
-            style: TextStyle(
-                color: Color.fromARGB(255, 148, 148, 148), fontSize: 16)));
+        child: Text("其它登录方式",
+            style: TextStyle(color: Colors.redAccent, fontSize: 16)));
     return ui;
   }
 
-  f() {
+  other() {
     Widget ui = Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

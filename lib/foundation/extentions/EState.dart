@@ -12,6 +12,8 @@ abstract class EStage<T extends StatefulWidget> extends State<T>{
 
 
   navigate(BuildContext context,MenuVO value) async{
-    
+    if(value.url!=null){
+      launch(value.url);
+    }
   }
 }

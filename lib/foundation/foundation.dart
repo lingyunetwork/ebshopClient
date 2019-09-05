@@ -5,6 +5,8 @@ import 'dart:core';
 import 'dart:ui';
 import 'package:ebshop/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //core
 part 'core/EventDispatcher.dart';
@@ -22,6 +24,7 @@ part "utils/JsonUtils.dart";
 part "utils/DataProvider.dart";
 part 'utils/Ux.dart';
 part "utils/TimerUtil.dart";
+part "utils/ValidateUtil.dart";
 
 part 'extentions/EState.dart';
 
