@@ -9,7 +9,7 @@ class FormModelUI extends StatefulWidget {
   _FromState createState() => _FromState();
 }
 
-class _FromState extends State<FormModelUI> {
+class _FromState extends StateEvent<FormModelUI> {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -23,56 +23,22 @@ class _FromState extends State<FormModelUI> {
   }
 
   Widget itemBuild(BuildContext context, int index) {
-    //ThemeData themeData = Theme.of(context);
-
     FormItemVO vo = widget.model._list[index];
-    var decoration = vo.decoration;
-    if (decoration == null) {
-      decoration = new InputDecoration(
-        labelText: vo.desc ?? vo.name,
-        filled: true,
-        fillColor: Colors.white,
-        hintText: vo.desc ?? vo.name,
 
-        contentPadding: EdgeInsets.fromLTRB(30, 10, 10, 10),
-
-        // focusedBorder: OutlineInputBorder(
-        //   borderSide: new BorderSide(color: Colors.grey[200]),
-        //   borderRadius: new BorderRadius.circular(25),
-        // ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: new BorderSide(color: Colors.grey[200]),
-          borderRadius: new BorderRadius.circular(25),
-        ),
-      );
+    FocusNode next;
+    if (index < widget.model._list.length - 1) {
+      var nexVO = widget.model._list[index + 1];
+      if (nexVO != null) {
+        next = nexVO._focus;
+      }
     }
     return Container(
-        height: 60,
+        height: vo.hasError?80:60,
         //color: Colors.red,
         margin: EdgeInsets.only(bottom: 5),
         child: Theme(
           data: Theme.of(context).copyWith(splashColor: Colors.transparent),
-          child: TextFormField(
-            decoration: decoration,
-            validator: (val) {
-              if (vo.maxlen > 0) {
-                return val.length > vo.maxlen ? "长度至多${vo.maxlen}位" : null;
-              }
-              if (vo.maxlen > 0) {
-                return val.length < vo.minlen ? "长度至少${vo.minlen}位" : null;
-              }
-
-              if (vo.validator != null) {
-                return vo.validator(val);
-              }
-
-              return null;
-            },
-            obscureText: vo.obscureText,
-            onSaved: (val) {
-              vo.value = val.trim();
-            },
-          ),
+          child: vo.getView(this, next),
         ));
   }
 }
@@ -80,15 +46,27 @@ class _FromState extends State<FormModelUI> {
 class FormModel {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final List<FormItemVO> _list = [];
+  final Map<String, FormItemVO> _map = {};
+
+  ActionT<FormItemVO> onChanged;
+
+  bool get hasEmpty {
+    for (var f in _list) {
+      if (f.value.length == 0) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   add(FormItemVO value) {
     _list.add(value);
+    _map[value.name] = value;
   }
 
   FormItemVO addByName(String name) {
-    var value = FormItemVO();
-    value.name = name;
-    _list.add(value);
+    var value = FormItemVO(name);
+    add(value);
     return value;
   }
 
@@ -101,25 +79,29 @@ class FormModel {
     return maps;
   }
 
-  bool validate() {
+  bool validate(StateEvent state) {
     var _form = _formKey.currentState;
     var b = _form.validate();
     if (b) {
       _form.save();
+    }else{
+      state.invalidate();
     }
     return b;
   }
 
-  void print() {}
+  String debug() {
+    var s = "";
+    for (var f in _list) {
+      s += "${f.name}:${f.value} \n";
+    }
+    print(s);
+    return s;
+  }
 
   get(String name) {
-    for (var f in _list) {
-      if (f.name == name) {
-        return f.value;
-      }
-    }
-
-    return "";
+    var f = _map[name];
+    return f != null ? f.value : null;
   }
 
   void reset() {
@@ -129,14 +111,114 @@ class FormModel {
 }
 
 class FormItemVO {
-  String name;
+  final String name;
   String desc;
   int maxlen = -1;
   int minlen = -1;
+  bool _hasError = false;
+
+  bool get hasError=>_hasError;
+
+  TextEditingController controller;
+  final FocusNode _focus = FocusNode();
+  FormItemVO(this.name) {}
 
   Handle<String, String> validator;
   InputDecoration decoration;
-  String value;
+  String value = "";
 
+  ActionT<FormItemVO> onChanged;
   bool obscureText = false;
+
+  getView(StateEvent<FormModelUI> state, FocusNode nextFocus) {
+    if (controller == null) {
+      controller = TextEditingController();
+    }
+
+    //if (decoration == null) {
+    decoration = new InputDecoration(
+      labelText: desc ?? name,
+      filled: true,
+      fillColor: Colors.white,
+      hintText: desc ?? name,
+
+      contentPadding: EdgeInsets.fromLTRB(30, 10, 10, 10),
+
+      // focusedBorder: OutlineInputBorder(
+      //   borderSide: new BorderSide(color: Colors.grey[200]),
+      //   borderRadius: new BorderRadius.circular(25),
+      // ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: new BorderSide(color: Colors.grey[200]),
+        borderRadius: new BorderRadius.circular(25),
+      ),
+
+      suffixIcon: controller.text.length > 0
+          ? IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () {
+                controller.clear();
+                state.invalidate();
+              })
+          : null,
+    );
+    //}
+
+    return TextFormField(
+      controller: controller,
+      focusNode: _focus,
+      decoration: decoration,
+      autovalidate: hasError,
+      validator: (val) {
+        if (maxlen > 0) {
+          _hasError = val.length > maxlen;
+          return _hasError ? "长度至多${maxlen}位" : null;
+        }
+        if (minlen > 0) {
+          _hasError = val.length < minlen;
+          return _hasError ? "长度至少${minlen}位" : null;
+        }
+
+        if (validator != null) {
+          var b = validator(val);
+          _hasError = b != null;
+          return b;
+        }
+        _hasError = false;
+        return null;
+      },
+      onFieldSubmitted: (v) {
+        if (v.length > 0) {
+          //_fieldFocusChange(state.context, _focus, nextFocus);
+        }
+      },
+      onChanged: (v) {
+        value = v;
+        if (onChanged != null) {
+          onChanged(this);
+        }
+        if (state.widget.model.onChanged != null) {
+          state.widget.model.onChanged(this);
+        }
+      },
+      obscureText: obscureText,
+      onSaved: (val) {
+        value = val.trim();
+      },
+    );
+  }
+
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    if (FocusScope.of(context).focusedChild != currentFocus) {
+      return;
+    }
+
+    currentFocus.unfocus();
+
+    if (nextFocus == null) {
+      return;
+    }
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
 }

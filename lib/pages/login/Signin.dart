@@ -11,21 +11,25 @@ class SigninPage extends StatefulWidget {
   _SigninPageState createState() => _SigninPageState();
 }
 
-class _SigninPageState extends StateEvent<SigninPage>{
+class _SigninPageState extends StateEvent<SigninPage> {
   FormModel formModel;
 
   @override
   void initState() {
     formModel = FormModel();
-    formModel.addByName("name");
-    var pass=formModel.addByName("password");
-    pass.obscureText=true;
+    var u=formModel.addByName("name");
+    u.minlen=3;
+    formModel.onChanged = onChange;
+
+    var p = formModel.addByName("password");
+    p.minlen=3;
+    p.obscureText = true;
 
     super.initState();
   }
 
   void onSubmitted() async {
-    if (formModel.validate() == false) {
+    if (formModel.validate(this) == false) {
       Toast.show("字段不合法", context);
       return;
     }
@@ -39,10 +43,7 @@ class _SigninPageState extends StateEvent<SigninPage>{
 
       var uri = '/MainPage';
       goURI(uri);
-
-    }else{
-      
-    }
+    } else {}
   }
 
   @override
@@ -72,10 +73,14 @@ class _SigninPageState extends StateEvent<SigninPage>{
       width: 328,
       height: 52,
       margin: EdgeInsets.only(top: 20),
-      child: Util.getButton("登录", onPressed: onSubmitted),
+      child: Util.getButton("登录", onPressed: formModel.hasEmpty?null:onSubmitted),
     );
 
     ui = Center(child: ui);
     return ui;
+  }
+
+  void onChange(FormItemVO o) {
+    invalidate();
   }
 }

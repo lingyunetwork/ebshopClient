@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:ebshop/foundation/foundation.dart';
 import 'package:ebshop/pages/widgets/FormModelUI.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_ui/image_picker_handler.dart';
@@ -11,7 +12,7 @@ class PostArticlePage extends StatefulWidget {
   _PostArticlePageState createState() => new _PostArticlePageState();
 }
 
-class _PostArticlePageState extends State<PostArticlePage>
+class _PostArticlePageState extends StateEvent<PostArticlePage>
     with ImagePickerListener, TickerProviderStateMixin {
   FormModel formModel;
   File _image;
@@ -41,8 +42,8 @@ class _PostArticlePageState extends State<PostArticlePage>
   }
 
   void _forSubmitted() {
-    if (formModel.validate()) {
-      formModel.print();
+    if (formModel.validate(this)) {
+      formModel.debug();
     }
   }
 

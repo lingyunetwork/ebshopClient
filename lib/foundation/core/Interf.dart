@@ -2,6 +2,7 @@ part of foundation;
 
 typedef void CallBack();
 typedef void ActionT<T>(T o);
+typedef void Action2T<T,V>(T o,V v);
 
 typedef R Handle<T, R>(T o);
 
