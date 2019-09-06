@@ -7,19 +7,29 @@ class Personal extends StatefulWidget {
   _PersonalState createState() => _PersonalState();
 }
 
-class _PersonalState extends State<Personal> {
+class _PersonalState extends State<Personal> with EStage {
   @override
   Widget build(BuildContext context) {
     var list = Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         banner(),
 
-        section()
+        section(),
+
+        Center(child: Util.getButton("退出登录",onPressed: loginOut)),
       ],
     );
     return SafeArea(
       child: list,
     );
+  }
+
+  loginOut(){
+    Core.logout();
+
+    goURI("/LoginPage");
   }
 
   banner() {

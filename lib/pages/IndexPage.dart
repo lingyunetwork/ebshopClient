@@ -31,10 +31,6 @@ class _IndexPageState extends State<IndexPage>
   addTabItem(String name, IconData icon, [Widget page]) {
     var ui = BottomNavigationBarItem(
         icon: Icon(icon),
-        activeIcon: Icon(
-          icon,
-          color: Colors.redAccent,
-        ),
         title: Text(name));
     bars.add(ui);
 

@@ -1,18 +1,23 @@
 part of foundation;
-abstract class EStage<T extends StatefulWidget> extends State<T>{
 
-  invalidate(){
+abstract class EStage<T extends StatefulWidget> extends State<T> {
+  invalidate() {
     this.setState(_empty);
   }
 
   //不做任何事
-  _empty(){
+  _empty() {}
 
+  toast(String value) {
+    Toast.show(value, context);
   }
 
+  goURI(String uri){
+    Navigator.of(context).pushReplacementNamed(uri);
+  }
 
-  navigate(BuildContext context,MenuVO value) async{
-    if(value.url!=null){
+  navigate(BuildContext context, MenuVO value) async {
+    if (value.url != null) {
       launch(value.url);
     }
   }

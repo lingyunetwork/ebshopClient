@@ -110,7 +110,7 @@ class SplashPageState extends State<SplashPage> with EStage {
     if (adURL != null) {
     } else {
       _page = _buildSplashBG();
-      countdowner.start(3, tick);
+      countdowner.start(1, tick);
     }
 
     invalidate();
@@ -124,9 +124,15 @@ class SplashPageState extends State<SplashPage> with EStage {
   }
 
   void _goMain() {
+    Core.sharedPreferences = sharedPreferences;
+    var token=sharedPreferences.get(Constant.KEY_TOKEN);
+    if(token==null){
+      RECT.setToken(token);
+    }
+
     var uri = "/MainPage";
     var isLogged = sharedPreferences.containsKey(Constant.KEY_LOGGED);
-    if (isLogged==false) {
+    if (isLogged == false) {
       uri = '/LoginPage';
     }
     Navigator.of(context).pushReplacementNamed(uri);

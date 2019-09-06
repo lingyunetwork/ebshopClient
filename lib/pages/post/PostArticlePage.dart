@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:ebshop/pages/widgets/FormModelUI.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_ui/image_picker_handler.dart';
 //import 'package:multi_image_picker/multi_image_picker.dart';
@@ -12,11 +13,8 @@ class PostArticlePage extends StatefulWidget {
 
 class _PostArticlePageState extends State<PostArticlePage>
     with ImagePickerListener, TickerProviderStateMixin {
-  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  FormModel formModel;
   File _image;
-  String _name;
-
-  String _password;
 
   @override
   userImage(File _image) {
@@ -35,16 +33,16 @@ class _PostArticlePageState extends State<PostArticlePage>
     );
     imagePicker = new ImagePickerHandler(this, _controller);
     imagePicker.build(0xFFEE6969, 0xFFFFFFFF, false);
+
+    formModel=FormModel();
+    formModel.addByName("标题");
+    formModel.addByName("说明");
     super.initState();
   }
 
   void _forSubmitted() {
-    var _form = _formKey.currentState;
-
-    if (_form.validate()) {
-      _form.save();
-      print(_name);
-      print(_password);
+    if (formModel.validate()) {
+      formModel.print();
     }
   }
 
@@ -81,6 +79,7 @@ class _PostArticlePageState extends State<PostArticlePage>
           asset,
           width: 300,
           height: 300,
+          fit: BoxFit.cover,
         );
       }),
     );
@@ -103,41 +102,20 @@ class _PostArticlePageState extends State<PostArticlePage>
         child: new Text('提交'),
       ),
       body: new Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                decoration: new InputDecoration(
-                  labelText: '标题',
-                ),
-                validator: (val) {
-                  return val.length < 4 ? "长度至少4位" : null;
-                },
-                onSaved: (val) {
-                  _name = val;
-                },
-              ),
-              TextFormField(
-                decoration: new InputDecoration(
-                  labelText: "副标题",
-                ),
-                onSaved: (val) {
-                  _password = val;
-                },
-              ),
-              IconButton(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            FormModelUI(model: formModel,),
+            IconButton(
                 icon: Icon(Icons.photo),
                 iconSize: 30,
                 onPressed: loadAssets,
               ),
-              Expanded(
-                child: buildGridView(),
-              )
-            ],
-          ),
+            Expanded(
+              child: buildGridView(),
+            )
+          ],
         ),
       ),
     );

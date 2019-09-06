@@ -8,6 +8,25 @@ class Util {
     ]);
   }
 
+  static Widget getButton(String title,{Function onPressed}){
+    return FlatButton(
+        onPressed: onPressed,
+        color: Colors.redAccent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(25)),
+        ),
+        textColor: Colors.white,
+        padding: EdgeInsets.all(0),
+        disabledColor: Colors.redAccent[100],
+        disabledTextColor: Colors.white70,
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 20),
+          textAlign: TextAlign.center,
+        ),
+      );
+  }
+
   static Widget getTitleBar(String value,
       [Color color = Colors.grey, IconData icon = Icons.dashboard]) {
     return Row(children: <Widget>[

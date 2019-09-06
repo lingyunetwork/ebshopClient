@@ -4,8 +4,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ebshop/pages/post/PostArticlePage.dart';
+import 'package:ebshop/pages/login/Signin.dart';
 import 'package:ebshop/pages/splash/Splash.dart';
+import 'package:ebshop/pages/utils/Core.dart';
 import 'package:ebshop/pages/widgets/DotSwiperPaginationBuilderE.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,9 +18,9 @@ part "pages/IndexPage.dart";
 
 
 part 'pages/PersionalPage.dart';
-part 'pages/register/LoginPage.dart';
-part 'pages/register/LoginMobile.dart';
-part 'pages/register/LoginCode.dart';
+part 'pages/login/LoginPage.dart';
+part 'pages/login/LoginMobile.dart';
+part 'pages/login/LoginCode.dart';
 
 part 'pages/HomePage.dart';
 part 'pages/home/TopTabBar.dart';
@@ -48,6 +49,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     //设计时的宽度
     Ux.init(375);
+    Core.mainContext=context;
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -57,7 +59,8 @@ class App extends StatelessWidget {
 
       routes: {
         '/MainPage': (ctx) => IndexPage(),
-        '/LoginPage': (ctx) => PostArticlePage(),
+        '/LoginPage': (ctx) => LoginPage(),
+        '/SigninPage': (ctx) => SigninPage(),
       },
       home:SplashPage(),
 

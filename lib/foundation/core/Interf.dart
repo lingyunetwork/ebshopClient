@@ -1,6 +1,6 @@
 part of foundation;
 
-typedef void Func();
+typedef void CallBack();
 typedef void ActionT<T>(T o);
 
 typedef R Handle<T, R>(T o);
