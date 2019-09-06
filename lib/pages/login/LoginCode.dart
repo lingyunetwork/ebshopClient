@@ -21,7 +21,7 @@ class LoginCode extends StatefulWidget {
   _LoginCodeState createState() => _LoginCodeState();
 }
 
-class _LoginCodeState extends State<LoginCode> with EStage {
+class _LoginCodeState extends StateEvent<LoginCode> {
   /// 墨水瓶（`InkWell`）可用时使用的字体样式。
   static final TextStyle _availableStyle = TextStyle(
     fontSize: 16.0,

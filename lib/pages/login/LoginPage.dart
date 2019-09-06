@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with EStage {
+class _LoginPageState extends StateEvent<LoginPage>  {
   var _controller = new TextEditingController();
   var _codeController = new TextEditingController();
 

@@ -12,7 +12,7 @@ class SplashPage extends StatefulWidget {
   }
 }
 
-class SplashPageState extends State<SplashPage> with EStage {
+class SplashPageState extends StateEvent<SplashPage>  {
   Widget _page;
   SharedPreferences sharedPreferences;
   Countdowner countdowner;

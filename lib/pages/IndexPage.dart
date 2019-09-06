@@ -5,8 +5,8 @@ class IndexPage extends StatefulWidget {
   createState() => _IndexPageState();
 }
 
-class _IndexPageState extends State<IndexPage>
-    with SingleTickerProviderStateMixin,EStage {
+class _IndexPageState extends StateEvent<IndexPage>
+    with SingleTickerProviderStateMixin {
   List<Widget> pages = [];
   List<BottomNavigationBarItem> bars = [];
   // 页面控制

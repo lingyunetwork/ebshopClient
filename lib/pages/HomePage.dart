@@ -6,8 +6,8 @@ class HomePage extends StatefulWidget {
   createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with TickerProviderStateMixin,EStage {
+class _HomePageState extends StateEvent<HomePage>
+    with TickerProviderStateMixin {
   Future<DataProvider> future;
   @override
   void initState() {

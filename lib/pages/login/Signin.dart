@@ -11,7 +11,7 @@ class SigninPage extends StatefulWidget {
   _SigninPageState createState() => _SigninPageState();
 }
 
-class _SigninPageState extends EStage<SigninPage>{
+class _SigninPageState extends StateEvent<SigninPage>{
   FormModel formModel;
 
   @override

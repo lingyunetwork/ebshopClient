@@ -9,7 +9,7 @@ class Core {
   static BuildContext mainContext;
   static SharedPreferences sharedPreferences;
 
-  static EventDispatcher dispatcher;
+  static EventDispatcher dispatcher=EventDispatcher();
   static dispatch(String eventType,[dynamic data]){
       dispatcher.simpleDispatch(eventType,data);
   }

@@ -7,7 +7,7 @@ class Personal extends StatefulWidget {
   _PersonalState createState() => _PersonalState();
 }
 
-class _PersonalState extends State<Personal> with EStage {
+class _PersonalState extends StateEvent<Personal> {
   @override
   Widget build(BuildContext context) {
     var list = Column(

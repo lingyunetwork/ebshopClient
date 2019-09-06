@@ -27,7 +27,7 @@ class FromItem extends StatefulWidget {
   _FromItemState createState() => _FromItemState();
 }
 
-class _FromItemState extends State<FromItem> with EStage {
+class _FromItemState extends State<FromItem> with StateEvent {
   @override
   Widget build(BuildContext context) {
     return Container(

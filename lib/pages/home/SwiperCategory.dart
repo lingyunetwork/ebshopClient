@@ -8,7 +8,7 @@ class SwiperCategory extends StatefulWidget {
   _SwiperCategoryState createState() => _SwiperCategoryState();
 }
 
-class _SwiperCategoryState extends State<SwiperCategory> with EStage{
+class _SwiperCategoryState extends StateEvent<SwiperCategory>{
   List<MenuVO> data;
   @override
   void initState() {
