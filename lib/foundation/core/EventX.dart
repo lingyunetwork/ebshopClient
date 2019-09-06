@@ -68,6 +68,10 @@ class EventX extends MiEventX {
   static const STATE_CHANGE = "stateChange";
   static const CLEAR_CACHE = "clearCache";
   static const DEPEND_READY = "dependReady";
+  static const LOGIN="login";
+  static const LOGOUT="logout";
+  static const UNLOGIN="unlogin";
+
   static const CLEAR = "clear";
 
   IEventDispatcher $mTarget;

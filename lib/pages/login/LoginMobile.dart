@@ -7,7 +7,7 @@ class LoginMobilePage extends StatefulWidget {
   createState() => _LoginMobilePageState();
 }
 
-class _LoginMobilePageState extends State<LoginMobilePage> with EStage {
+class _LoginMobilePageState extends State<LoginMobilePage> with EStage{
   var _controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {

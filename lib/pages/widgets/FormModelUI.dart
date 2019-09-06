@@ -54,6 +54,7 @@ class _FromState extends State<FormModelUI> {
           data: Theme.of(context).copyWith(splashColor: Colors.transparent),
           child: TextFormField(
             decoration: decoration,
+
             validator: (val) {
               if (vo.maxlen > 0) {
                 return val.length > vo.maxlen ? "长度至多${vo.maxlen}位" : null;
@@ -68,8 +69,10 @@ class _FromState extends State<FormModelUI> {
 
               return null;
             },
+
+            obscureText: vo.obscureText,
             onSaved: (val) {
-              vo.value = val;
+              vo.value = val.trim();
             },
           ),
         ));
@@ -131,4 +134,6 @@ class FormItemVO {
   Handle<String, String> validator;
   InputDecoration decoration;
   String value;
+
+  bool obscureText=false;
 }

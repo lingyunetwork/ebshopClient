@@ -17,10 +17,10 @@ enum NodeActiveState {
 }
 
 abstract class IEventDispatcher {
- bool addEventListener(String type, ActionT<EventX> listener, [num priority=0]);
-    bool hasEventListener(String type);
-    bool removeEventListener(String type, ActionT<EventX> listener);
-    bool dispatchEvent(EventX e);
+ bool on(String type, ActionT<EventX> listener, [num priority=0]);
+    bool has(String type);
+    bool off(String type, ActionT<EventX> listener);
+    bool dispatch(EventX e);
 }
 
 abstract class IDisposable {}

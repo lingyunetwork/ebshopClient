@@ -79,13 +79,13 @@ class SocketX {
     _sender.close();
   }
 
-  static bool AddEventListener(String type, ActionT<EventX> listener,
+  static bool On(String type, ActionT<EventX> listener,
       [priority = 0]) {
-    return _sender.addEventListener(type, listener, priority);
+    return _sender.on(type, listener, priority);
   }
 
   static bool RemoveEventListener(String type, ActionT<EventX> listener) {
-    return _sender.removeEventListener(type, listener);
+    return _sender.off(type, listener);
   }
 
   static bool AddListener(num code, ActionT<IStream> handle,

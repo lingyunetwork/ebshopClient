@@ -4,7 +4,7 @@ class HttpJsonResult {
   bool success;
   dynamic data;
 
-  var code;
+  int code;
   
   HttpJsonResult();
 }

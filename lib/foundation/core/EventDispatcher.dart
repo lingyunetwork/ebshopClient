@@ -12,7 +12,7 @@ class EventDispatcher with IEventDispatcher, IDisposable {
     this.mTarget = target;
   }
 
-  bool addEventListener(String type, ActionT<EventX> listener,
+  bool on(String type, ActionT<EventX> listener,
       [num priority = 0]) {
     if (listener == null) {
       return false;
@@ -30,7 +30,7 @@ class EventDispatcher with IEventDispatcher, IDisposable {
     return signal.add(listener, priority);
   }
 
-  bool dispatchEvent(EventX e) {
+  bool dispatch(EventX e) {
     if (e == null) {
       return false;
     }
@@ -91,7 +91,7 @@ class EventDispatcher with IEventDispatcher, IDisposable {
     return e.stopsPropagation;
   }
 
-  bool hasEventListener(String type) {
+  bool has(String type) {
     if (this.mEventListeners == null) {
       return false;
     }
@@ -103,7 +103,7 @@ class EventDispatcher with IEventDispatcher, IDisposable {
     return false;
   }
 
-  bool removeEventListener(String type, ActionT<EventX> listener) {
+  bool off(String type, ActionT<EventX> listener) {
     if (this.mEventListeners != null) {
       var signal = this.mEventListeners.get(type);
       if (signal == null) {
@@ -127,11 +127,11 @@ class EventDispatcher with IEventDispatcher, IDisposable {
   }
 
   bool simpleDispatch(String type, [data]) {
-    if (this.hasEventListener(type) == false) {
+    if (this.has(type) == false) {
       return false;
     }
     var e = EventX.fromPool(type, data, false);
-    var b = this.dispatchEvent(e);
+    var b = this.dispatch(e);
     EventX.toPool(e);
     return b;
   }

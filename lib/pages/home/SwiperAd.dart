@@ -8,7 +8,7 @@ class SwiperAd extends StatefulWidget {
   _SwiperAdState createState() => _SwiperAdState();
 }
 
-class _SwiperAdState extends State<SwiperAd> with EStage {
+class _SwiperAdState extends State<SwiperAd> with EStage{
   List<MenuVO> data;
 
   @override

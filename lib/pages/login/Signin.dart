@@ -11,14 +11,15 @@ class SigninPage extends StatefulWidget {
   _SigninPageState createState() => _SigninPageState();
 }
 
-class _SigninPageState extends State<SigninPage> with EStage {
+class _SigninPageState extends EStage<SigninPage>{
   FormModel formModel;
 
   @override
   void initState() {
     formModel = FormModel();
     formModel.addByName("name");
-    formModel.addByName("password");
+    var pass=formModel.addByName("password");
+    pass.obscureText=true;
 
     super.initState();
   }
