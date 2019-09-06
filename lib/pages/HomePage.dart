@@ -75,6 +75,8 @@ class _HomePageState extends StateEvent<HomePage>
         getSwiperSlive(data),
         getSecondTabSlive(data),
         getLastTitleSlive(data),
+        getCardListSlive(),
+        getLastTitleSlive(data),
         getLastListSlive(data)
       ],
     );
@@ -132,6 +134,19 @@ class _HomePageState extends StateEvent<HomePage>
     Widget ui = SingleBar();
     return SliverToBoxAdapter(
       child: ui,
+    );
+  }
+
+  Widget getCardListSlive() {
+    return SliverToBoxAdapter(
+      child: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          CardItem(),
+          CardItem(),
+          CardItem(),
+        ],
+      ),
     );
   }
 

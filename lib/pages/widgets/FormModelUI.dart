@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 class FormModelUI extends StatefulWidget {
   final FormModel model;
-
-  FormModelUI({Key key, this.model}) : super(key: key);
+  final Axis scrollDirection;
+  FormModelUI({
+    Key key,
+    this.model,
+    this.scrollDirection: Axis.vertical,
+  }) : super(key: key);
 
   _FromState createState() => _FromState();
 }
@@ -15,6 +19,7 @@ class _FromState extends StateEvent<FormModelUI> {
     return Form(
       key: widget.model._formKey,
       child: ListView.builder(
+        scrollDirection: widget.scrollDirection,
         shrinkWrap: true,
         itemCount: widget.model._list.length,
         itemBuilder: itemBuild,
@@ -33,7 +38,7 @@ class _FromState extends StateEvent<FormModelUI> {
       }
     }
     return Container(
-        height: vo.hasError?80:60,
+        height: vo.hasError ? 80 : 60,
         //color: Colors.red,
         margin: EdgeInsets.only(bottom: 5),
         child: Theme(
@@ -60,6 +65,7 @@ class FormModel {
   }
 
   add(FormItemVO value) {
+    value._formModel = this;
     _list.add(value);
     _map[value.name] = value;
   }
@@ -84,7 +90,7 @@ class FormModel {
     var b = _form.validate();
     if (b) {
       _form.save();
-    }else{
+    } else {
       state.invalidate();
     }
     return b;
@@ -117,11 +123,16 @@ class FormItemVO {
   int minlen = -1;
   bool _hasError = false;
 
-  bool get hasError=>_hasError;
+  TextInputType keyboardType;
+
+  bool get hasError => _hasError;
 
   TextEditingController controller;
   final FocusNode _focus = FocusNode();
   FormItemVO(this.name) {}
+
+  FormModel _formModel;
+  FormModel get formModel => _formModel;
 
   Handle<String, String> validator;
   InputDecoration decoration;
@@ -130,7 +141,7 @@ class FormItemVO {
   ActionT<FormItemVO> onChanged;
   bool obscureText = false;
 
-  getView(StateEvent<FormModelUI> state, FocusNode nextFocus) {
+  getView(StateEvent state, [FocusNode nextFocus]) {
     if (controller == null) {
       controller = TextEditingController();
     }
@@ -169,7 +180,9 @@ class FormItemVO {
       focusNode: _focus,
       decoration: decoration,
       autovalidate: hasError,
+      keyboardType: keyboardType,
       validator: (val) {
+        val=val.trim();
         if (maxlen > 0) {
           _hasError = val.length > maxlen;
           return _hasError ? "长度至多${maxlen}位" : null;
@@ -187,18 +200,19 @@ class FormItemVO {
         _hasError = false;
         return null;
       },
-      onFieldSubmitted: (v) {
-        if (v.length > 0) {
+      onFieldSubmitted: (val) {
+        val=val.trim();
+        if (val.length > 0) {
           //_fieldFocusChange(state.context, _focus, nextFocus);
         }
       },
       onChanged: (v) {
-        value = v;
+        value = v.trim();
         if (onChanged != null) {
           onChanged(this);
         }
-        if (state.widget.model.onChanged != null) {
-          state.widget.model.onChanged(this);
+        if (_formModel != null && _formModel.onChanged != null) {
+          _formModel.onChanged(this);
         }
       },
       obscureText: obscureText,
@@ -208,17 +222,17 @@ class FormItemVO {
     );
   }
 
-  _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    if (FocusScope.of(context).focusedChild != currentFocus) {
-      return;
-    }
+  // _fieldFocusChange(
+  //     BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  //   if (FocusScope.of(context).focusedChild != currentFocus) {
+  //     return;
+  //   }
 
-    currentFocus.unfocus();
+  //   currentFocus.unfocus();
 
-    if (nextFocus == null) {
-      return;
-    }
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
+  //   if (nextFocus == null) {
+  //     return;
+  //   }
+  //   FocusScope.of(context).requestFocus(nextFocus);
+  // }
 }

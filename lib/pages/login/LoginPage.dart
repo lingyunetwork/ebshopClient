@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends StateEvent<LoginPage>  {
+class _LoginPageState extends StateEvent<LoginPage> {
   var _controller = new TextEditingController();
   var _codeController = new TextEditingController();
 
@@ -86,51 +86,8 @@ class _LoginPageState extends StateEvent<LoginPage>  {
         ),
       ),
       Expanded(
-          child: TextFormField(
-              inputFormatters: <TextInputFormatter>[
-            LengthLimitingTextInputFormatter(11),
-            WhitelistingTextInputFormatter.digitsOnly,
-            BlacklistingTextInputFormatter.singleLineFormatter,
-          ],
-              controller: _controller,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                  hintText: "电话号码",
-                  // contentPadding: EdgeInsets.only(
-                  //   left: 10,
-                  // ),
-filled: true,
-
-                  fillColor: Colors.white,
-                  //contentPadding: const EdgeInsets.only(
-                  //    left: 14.0, bottom: 8.0, top: 8.0),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.white),
-                    borderRadius: new BorderRadius.circular(25.7),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.white),
-                    borderRadius: new BorderRadius.circular(25.7),
-                  ),
-
-                  border: InputBorder.none,
-                  suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
-                        _controller.clear();
-                      })),
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 1,
-              //maxLength: 11,
-              maxLengthEnforced: true,
-              autocorrect: false,
-              autofocus: true,
-              onFieldSubmitted: onSubmitted,
-              onChanged: (v) => this.invalidate()))
+        child: Util.getInput("电话号码", _controller, onSubmitted, this),
+      )
     ]);
 
     var phone = Container(
