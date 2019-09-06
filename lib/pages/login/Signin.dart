@@ -35,11 +35,13 @@ class _SigninPageState extends StateEvent<SigninPage>{
 
     if (res.success) {
       Core.login(res.data);
+      formModel.reset();
 
       var uri = '/MainPage';
       goURI(uri);
-    } else {
-      toast(res.data);
+
+    }else{
+      
     }
   }
 

@@ -13,14 +13,14 @@ class Core {
   static dispatch(String eventType,[dynamic data]){
       dispatcher.simpleDispatch(eventType,data);
   }
-  static addEventListener(String eventType,ActionT<EventX> listener){
+  static on(String eventType,ActionT<EventX> listener){
       dispatcher.on(eventType,listener);
   }
-  static removeEventListener(String eventType,ActionT<EventX> listener){
+  static off(String eventType,ActionT<EventX> listener){
       return dispatcher.off(eventType,listener);
   }
 
-  static removeEventListeners(String eventType){
+  static offs(String eventType){
       return dispatcher.removeEventListeners(eventType);
   }
 

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:ui';
 import 'package:ebshop/main.dart';
+import 'package:ebshop/pages/utils/Core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
