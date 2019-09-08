@@ -9,6 +9,11 @@ class CardItem extends StatefulWidget {
 class _CardItemState extends State<CardItem> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle titleStyle =
+        theme.textTheme.headline.copyWith(color: Colors.white);
+    //final TextStyle descriptionStyle = theme.textTheme.subhead;
+
     Widget ui;
 
     var rng = new Random();
@@ -20,6 +25,25 @@ class _CardItemState extends State<CardItem> {
       errorWidget: (context, url, error) => new Icon(Icons.error),
       imageUrl: 'https://picsum.photos/250?image=$index',
       fit: BoxFit.fitWidth,
+    );
+
+    icon = Stack(
+      children: <Widget>[
+        icon,
+        Positioned(
+          bottom: 5.0,
+          left: 16.0,
+          right: 16.0,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Flutter布局之Card使用",
+              style: titleStyle,
+            ),
+          ),
+        ),
+      ],
     );
 
     var title = Text(
