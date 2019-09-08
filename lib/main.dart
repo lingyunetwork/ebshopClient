@@ -8,7 +8,6 @@ import 'package:ebshop/pages/login/Signin.dart';
 import 'package:ebshop/pages/splash/Splash.dart';
 import 'package:ebshop/pages/utils/Core.dart';
 import 'package:ebshop/pages/widgets/DotSwiperPaginationBuilderE.dart';
-import 'package:ebshop/pages/widgets/FormModelUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
