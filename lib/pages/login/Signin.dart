@@ -3,7 +3,6 @@ import 'package:ebshop/main.dart';
 import 'package:ebshop/pages/utils/Core.dart';
 import 'package:ebshop/pages/widgets/FormModelUI.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
 
 class SigninPage extends StatefulWidget {
   SigninPage({Key key}) : super(key: key);
@@ -30,7 +29,7 @@ class _SigninPageState extends StateEvent<SigninPage> {
 
   void onSubmitted() async {
     if (formModel.validate(this) == false) {
-      Toast.show("字段不合法", context);
+      toast("字段不合法");
       return;
     }
 

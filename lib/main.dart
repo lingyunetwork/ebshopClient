@@ -11,7 +11,6 @@ import 'package:ebshop/pages/widgets/DotSwiperPaginationBuilderE.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:ebshop/foundation/foundation.dart';
 
 part "pages/IndexPage.dart";

@@ -34,11 +34,11 @@ class _SearchBar extends StatelessWidget {
     return Container(
         child: InkWell(
             child: Row(children: <Widget>[
-              Icon(Feather.search,color: Colors.grey),
+              Icon(Icons.search,color: Colors.grey),
               SizedBox(width: 10),
               Text('搜索',style:TextStyle(color: Colors.grey)),
               Expanded(child: Container()),
-              Icon(Feather.camera,color: Colors.grey),
+              Icon(Icons.camera,color: Colors.grey),
             ]),
             onTap: () =>
                 showSearch(context: context, delegate: SearchBarDelegate())),

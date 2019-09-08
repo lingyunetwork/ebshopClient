@@ -23,7 +23,9 @@ abstract class StateEvent<T extends StatefulWidget> extends State<T> {
   _empty() {}
 
   toast(String value) {
-    Toast.show(value, context);
+    Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text('$value'),
+                      ));
   }
 
   goURI(String uri) {

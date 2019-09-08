@@ -4,8 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:ebshop/foundation/foundation.dart';
 import 'package:ebshop/pages/widgets/FormModelUI.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker_ui/image_picker_handler.dart';
-//import 'package:multi_image_picker/multi_image_picker.dart';
 
 class PostArticlePage extends StatefulWidget {
   @override
@@ -13,27 +11,20 @@ class PostArticlePage extends StatefulWidget {
 }
 
 class _PostArticlePageState extends StateEvent<PostArticlePage>
-    with ImagePickerListener, TickerProviderStateMixin {
+    with TickerProviderStateMixin {
   FormModel formModel;
   File _image;
 
-  @override
-  userImage(File _image) {
-    setState(() {
-      this._image = _image;
-    });
-  }
-
   AnimationController _controller;
-  ImagePickerHandler imagePicker;
+  //ImagePickerHandler imagePicker;
   @override
   void initState() {
     _controller = new AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    imagePicker = new ImagePickerHandler(this, _controller);
-    imagePicker.build(0xFFEE6969, 0xFFFFFFFF, false);
+    // imagePicker = new ImagePickerHandler(this, _controller);
+    // imagePicker.build(0xFFEE6969, 0xFFFFFFFF, false);
 
     formModel=FormModel();
     formModel.addByName("标题");
@@ -63,7 +54,7 @@ class _PostArticlePageState extends StateEvent<PostArticlePage>
   }
 
   Future<void> loadAssets() async {
-    imagePicker.showDialog(context);
+    // imagePicker.showDialog(context);
   }
 
   Widget buildGridView() {
