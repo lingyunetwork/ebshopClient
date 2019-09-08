@@ -1,9 +1,4 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
-import 'package:ebshop/foundation/foundation.dart';
-import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of app;
 
 class Core {
   static BuildContext mainContext;

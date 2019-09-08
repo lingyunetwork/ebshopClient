@@ -1,9 +1,4 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
-import 'package:ebshop/foundation/foundation.dart';
-import 'package:ebshop/pages/widgets/FormModelUI.dart';
-import 'package:flutter/material.dart';
+part of  app;
 
 class PostArticlePage extends StatefulWidget {
   @override

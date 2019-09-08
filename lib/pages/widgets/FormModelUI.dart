@@ -1,6 +1,4 @@
-import 'package:ebshop/foundation/foundation.dart';
-import 'package:flutter/material.dart';
-
+part of app;
 class FormModelUI extends StatefulWidget {
   final FormModel model;
   final Axis scrollDirection;

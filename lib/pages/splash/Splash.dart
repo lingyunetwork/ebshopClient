@@ -1,9 +1,4 @@
-import 'package:ebshop/foundation/foundation.dart';
-import 'package:ebshop/pages/utils/Core.dart';
-import 'package:ebshop/pages/widgets/DotSwiperPaginationBuilderE.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of app;
 
 class SplashPage extends StatefulWidget {
   @override
@@ -53,7 +48,7 @@ class SplashPageState extends StateEvent<SplashPage>  {
       itemCount: len,
       pagination: new SwiperPagination(
           margin: const EdgeInsets.all(3.0),
-          builder: DotSwiperPaginationBuilderE()),
+          builder: DotSwiper()),
       scale: 1.0,
       autoplay: true,
     );

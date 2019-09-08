@@ -1,18 +1,25 @@
 library app;
 
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ebshop/pages/login/Signin.dart';
-import 'package:ebshop/pages/splash/Splash.dart';
-import 'package:ebshop/pages/utils/Core.dart';
-import 'package:ebshop/pages/widgets/DotSwiperPaginationBuilderE.dart';
+//package;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebshop/foundation/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+
+//pages;
+part 'pages/login/Signin.dart';
+part 'pages/splash/Splash.dart';
+part 'pages/utils/Core.dart';
+
+part 'pages/widgets/DotSwiper.dart';
 part "pages/IndexPage.dart";
 
 
@@ -28,6 +35,8 @@ part 'pages/home/SubTabBar.dart';
 part 'pages/home/Card.dart';
 part 'pages/home/SwiperCategory.dart';
 
+part 'pages/post/PostArticlePage.dart';
+
 
 part 'pages/home/SwiperAd.dart';
 
@@ -37,6 +46,8 @@ part 'pages/widgets/FromItem.dart';
 part 'pages/utils/Utils.dart';
 part "pages/vos/vos.dart";
 
+
+part 'pages/widgets/FormModelUI.dart';
 part 'pages/delegate/search_bar_delegate.dart';
 part 'pages/delegate/SliverPersistentHeaderDelegate.dart';
 
@@ -62,7 +73,6 @@ class App extends StatelessWidget {
         '/SigninPage': (ctx) => SigninPage(),
       },
       home:SplashPage(),
-
       debugShowCheckedModeBanner: true,
     );
   }

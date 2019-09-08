@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+part of app;
 
-class DotSwiperPaginationBuilderE extends SwiperPlugin {
+class DotSwiper extends SwiperPlugin {
   ///color when current index,if set null , will be Theme.of(context).primaryColor
   final Color activeColor;
 
@@ -19,7 +18,7 @@ class DotSwiperPaginationBuilderE extends SwiperPlugin {
 
   final Key key;
 
-  const DotSwiperPaginationBuilderE(
+  const DotSwiper(
       {this.activeColor,
       this.color,
       this.key,

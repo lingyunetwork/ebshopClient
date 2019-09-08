@@ -1,8 +1,4 @@
-import 'package:ebshop/foundation/foundation.dart';
-import 'package:ebshop/main.dart';
-import 'package:ebshop/pages/utils/Core.dart';
-import 'package:ebshop/pages/widgets/FormModelUI.dart';
-import 'package:flutter/material.dart';
+part of app;
 
 class SigninPage extends StatefulWidget {
   SigninPage({Key key}) : super(key: key);

@@ -25,7 +25,7 @@ class _SwiperAdState extends StateEvent<SwiperAd>{
       itemCount: data.length,
       pagination: new SwiperPagination(
           margin: const EdgeInsets.all(3.0),
-          builder: DotSwiperPaginationBuilderE()),
+          builder: DotSwiper()),
       scale: 1.0,
       autoplay: true,
     );

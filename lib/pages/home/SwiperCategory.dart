@@ -25,7 +25,7 @@ class _SwiperCategoryState extends StateEvent<SwiperCategory>{
         child: Swiper(
           itemBuilder: _itemBuilder,
           itemCount: 2,
-          pagination: new SwiperPagination(builder:DotSwiperPaginationBuilderE()),
+          pagination: new SwiperPagination(builder:DotSwiper()),
           autoplay: false,
           loop: false,
         ));
