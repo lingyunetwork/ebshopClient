@@ -1,17 +1,26 @@
 part of foundation;
 
 abstract class StateEvent<T extends StatefulWidget> extends State<T> {
+  @protected
+  BuildContext innerContext;
+  @protected
+  bool isStage = false;
+
   @override
   void initState() {
     super.initState();
 
-    Core.on(EventX.ERROR, _onError);
-    Core.on(EventX.UNLOGIN, _onUnLogin);
+    if (isStage) {
+      Facade.on(EventX.ERROR, _onError);
+      Facade.on(EventX.UNLOGIN, _onUnLogin);
+    }
   }
 
   dispose() {
-    Core.off(EventX.ERROR, _onError);
-    Core.off(EventX.UNLOGIN, _onUnLogin);
+    if (isStage) {
+      Facade.off(EventX.ERROR, _onError);
+      Facade.off(EventX.UNLOGIN, _onUnLogin);
+    }
     super.dispose();
   }
 
@@ -23,16 +32,20 @@ abstract class StateEvent<T extends StatefulWidget> extends State<T> {
   _empty() {}
 
   toast(String value) {
-    Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text('$value'),
-                      ));
+    var c = innerContext;
+    if (c != null) {
+      c = context;
+    }
+    Scaffold.of(c).showSnackBar(SnackBar(
+      content: Text('$value'),
+    ));
   }
 
   goURI(String uri) {
     Navigator.of(context).pushReplacementNamed(uri);
   }
 
-  navigate(BuildContext context, MenuVO value) async {
+  navigate(BuildContext context, dynamic value) async {
     if (value.url != null) {
       launch(value.url);
     }

@@ -9,22 +9,6 @@ class Core {
   static BuildContext mainContext;
   static SharedPreferences sharedPreferences;
 
-  static EventDispatcher dispatcher=EventDispatcher();
-  static dispatch(String eventType,[dynamic data]){
-      dispatcher.simpleDispatch(eventType,data);
-  }
-  static on(String eventType,ActionT<EventX> listener){
-      dispatcher.on(eventType,listener);
-  }
-  static off(String eventType,ActionT<EventX> listener){
-      return dispatcher.off(eventType,listener);
-  }
-
-  static offs(String eventType){
-      return dispatcher.removeEventListeners(eventType);
-  }
-
-
   static logout() {
     RECT.setToken("");
     sharedPreferences.remove(Constant.KEY_LOGGED);
@@ -114,7 +98,7 @@ class RECT {
       result.success = code == 0;
       result.code = code;
       if(result.code==401){
-        Core.dispatch(EventX.UNLOGIN);
+        Facade.dispatch(EventX.UNLOGIN);
       }
 
       if (result.success) {
@@ -122,7 +106,7 @@ class RECT {
       } else {
         var message = response.data["errmsg"];
         result.data = message;
-        Core.dispatch(EventX.ERROR,message);
+        Facade.dispatch(EventX.ERROR,message);
       }
     } else {}
     return result;
@@ -133,7 +117,7 @@ class RECT {
     result.success = false;
     result.code=404;
     result.data = value.message;
-    Core.dispatch(EventX.ERROR,result.data);
+    Facade.dispatch(EventX.ERROR,result.data);
     return result;
   }
 }

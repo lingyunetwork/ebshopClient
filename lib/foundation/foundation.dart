@@ -3,8 +3,6 @@ library foundation;
 import 'dart:async';
 import 'dart:core';
 import 'dart:ui';
-import 'package:ebshop/main.dart';
-import 'package:ebshop/pages/utils/Core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,6 +12,7 @@ part 'core/EventDispatcher.dart';
 part 'core/EventX.dart';
 part 'core/MiEventX.dart';
 part 'core/Interf.dart';
+part 'core/Facade.dart';
 part 'structure/Dictionary.dart';
 part 'structure/QueueHandle.dart';
 part 'structure/Signal.dart';
@@ -27,6 +26,6 @@ part 'utils/Ux.dart';
 part "utils/TimerUtil.dart";
 part "utils/ValidateUtil.dart";
 
-part 'extentions/EState.dart';
+part 'extentions/StateEvent.dart';
 part 'extentions/HttpJsonResult.dart';
 

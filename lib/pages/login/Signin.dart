@@ -16,14 +16,15 @@ class _SigninPageState extends StateEvent<SigninPage> {
   @override
   void initState() {
     formModel = FormModel();
-    var u=formModel.addByName("name");
-    u.minlen=3;
+    var u = formModel.addByName("name");
+    u.minlen = 3;
     formModel.onChanged = onChange;
 
     var p = formModel.addByName("password");
-    p.minlen=3;
+    p.minlen = 3;
     p.obscureText = true;
 
+    isStage = true;
     super.initState();
   }
 
@@ -51,19 +52,10 @@ class _SigninPageState extends StateEvent<SigninPage> {
       appBar: AppBar(
         title: Text("登陆"),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: <Widget>[
-              FormModelUI(
-                model: formModel,
-              ),
-              sendButton(),
-            ],
-          ),
-        ),
-      ),
+      body: Builder(
+          // Create an inner BuildContext so that the snackBar onPressed methods
+          // can refer to the Scaffold with Scaffold.of().
+          builder: buildBody),
     );
   }
 
@@ -72,7 +64,8 @@ class _SigninPageState extends StateEvent<SigninPage> {
       width: 328,
       height: 52,
       margin: EdgeInsets.only(top: 20),
-      child: Util.getButton("登录", onPressed: formModel.hasEmpty?null:onSubmitted),
+      child: Util.getButton("登录",
+          onPressed: formModel.hasEmpty ? null : onSubmitted),
     );
 
     ui = Center(child: ui);
@@ -81,5 +74,27 @@ class _SigninPageState extends StateEvent<SigninPage> {
 
   void onChange(FormItemVO o) {
     invalidate();
+  }
+
+  Widget buildBody(BuildContext context) {
+    this.innerContext = context;
+    Widget ui = Column(
+      children: <Widget>[
+        FormModelUI(
+          model: formModel,
+        ),
+        sendButton(),
+      ],
+    );
+
+    ui = Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ui,
+    );
+    ;
+    ui = SafeArea(
+      child: ui,
+    );
+    return ui;
   }
 }
