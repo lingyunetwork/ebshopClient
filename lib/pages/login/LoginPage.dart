@@ -20,6 +20,7 @@ class _LoginPageState extends StateEvent<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,

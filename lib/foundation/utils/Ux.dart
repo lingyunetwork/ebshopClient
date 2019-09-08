@@ -7,17 +7,18 @@ class Ux {
   static double _topbarH = mediaQuery.padding.top;
   static double _botbarH = mediaQuery.padding.bottom;
   static double _pixelRatio = mediaQuery.devicePixelRatio;
-  static var _ratio;
+  static double _ratio;
   static init(int number) {
     int uiwidth = number is int ? number : 750;
     _ratio = _width / uiwidth;
   }
 
-  static px(number) {
-    if (!(_ratio is double || _ratio is int)) {
+  static double px(double value) {
+    if (!(_ratio is num)) {
       Ux.init(750);
     }
-    return number * _ratio;
+    //return value;
+    return value * _ratio;
   }
 
   static onepx() {

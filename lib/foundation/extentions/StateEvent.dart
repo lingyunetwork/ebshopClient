@@ -33,7 +33,7 @@ abstract class StateEvent<T extends StatefulWidget> extends State<T> {
 
   toast(String value) {
     var c = innerContext;
-    if (c != null) {
+    if (c == null) {
       c = context;
     }
     Scaffold.of(c).showSnackBar(SnackBar(

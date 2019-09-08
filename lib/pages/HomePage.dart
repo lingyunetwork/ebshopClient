@@ -106,10 +106,10 @@ class _HomePageState extends StateEvent<HomePage>
   Widget getSwiperSlive(DataProvider value) {
     Widget ui = Column(
       children: <Widget>[
+        SwiperAd(value),
         SwiperCategory(
           value,
         ),
-        SwiperAd(value),
       ],
     );
 
@@ -121,8 +121,8 @@ class _HomePageState extends StateEvent<HomePage>
   Widget getSecondTabSlive(DataProvider value) {
     Widget ui = SubTabBar(value, this);
     var header = SliverPersistentHeaderDelegateEx(ui);
-    header.maxHeight = 40;
-    header.minHeight = 40;
+    header.maxHeight = Ux.px(40);
+    header.minHeight = Ux.px(40);
 
     return SliverPersistentHeader(
       pinned: true,
@@ -138,30 +138,34 @@ class _HomePageState extends StateEvent<HomePage>
   }
 
   Widget getCardListSlive() {
-    return SliverToBoxAdapter(
-      child: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          CardItem(),
-          CardItem(),
-          CardItem(),
-        ],
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return CardItem();
+        },
+        childCount: 3,
       ),
     );
   }
 
+  List<GoodsVO> products;
   Widget getLastListSlive(DataProvider value) {
-    var ui = SliverFixedExtentList(
-      itemExtent: 50.0,
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Container(
-            alignment: Alignment.center,
-            color: Colors.lightBlue[100 * (index % 9)],
-            child: Text('list item $index'),
-          );
-        },
+    if (products == null) {
+      Random rnd = new Random();
+      products = List.generate(50, (i) {
+        var vo = GoodsVO.test(rnd);
+        vo.name = "TEST$i";
+        return vo;
+      });
+    }
+    ;
+    Widget ui = SliverStaggeredGrid.countBuilder(
+      crossAxisCount: 2,
+      staggeredTileBuilder: (_) => StaggeredTile.fit(1),
+      itemBuilder: (context, index) => GoodsCard(
+        goodsVO: products[index],
       ),
+      itemCount: products.length,
     );
 
     return ui;

@@ -20,7 +20,7 @@ class _SwiperCategoryState extends StateEvent<SwiperCategory>{
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 180,
+        height: Ux.px(180),
         color: Colors.white,
         child: Swiper(
           itemBuilder: _itemBuilder,

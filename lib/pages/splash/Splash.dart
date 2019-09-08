@@ -31,7 +31,6 @@ class SplashPageState extends StateEvent<SplashPage>  {
   void _initAsync() async {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getBool(Constant.KEY_GUIDE) != true) {
-      sharedPreferences.setBool(Constant.KEY_GUIDE, true);
       _initGuides();
     } else {
       _initSplash();
@@ -51,6 +50,7 @@ class SplashPageState extends StateEvent<SplashPage>  {
           builder: DotSwiper()),
       scale: 1.0,
       autoplay: true,
+      loop: false,
     );
 
     _page = Container(
@@ -83,6 +83,7 @@ class SplashPageState extends StateEvent<SplashPage>  {
             style: new TextStyle(fontSize: 16.0),
           ),
           onPressed: () {
+             sharedPreferences.setBool(Constant.KEY_GUIDE, true);
             _goMain();
           },
         ),
@@ -93,7 +94,7 @@ class SplashPageState extends StateEvent<SplashPage>  {
   Widget _getImage(String path) {
     return Image.asset(
       path,
-      fit: BoxFit.fitWidth,
+      fit: BoxFit.cover,
       width: double.infinity,
       height: double.infinity,
     );
@@ -128,7 +129,8 @@ class SplashPageState extends StateEvent<SplashPage>  {
     var uri = "/MainPage";
     var isLogged = sharedPreferences.containsKey(Constant.KEY_LOGGED);
     if (isLogged == false) {
-      uri = '/LoginPage';
+      //test;
+      //uri = '/LoginPage';
     }
     Navigator.of(context).pushReplacementNamed(uri);
   }

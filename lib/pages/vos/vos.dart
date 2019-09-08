@@ -21,3 +21,19 @@ class MenuVO implements IFromJSON<MenuVO> {
     return vo;
   }
 }
+
+
+class GoodsVO extends MenuVO{
+  int width;
+  int height;
+
+  GoodsVO.test(Random rnd){
+     width=rnd.nextInt(500) + 200;
+     height= rnd.nextInt(800) + 200;
+     desc="随随便便的说明就好了随随便便的说明就好了";
+
+     url='https://picsum.photos/$width/$height/';
+  }
+
+  var desc;
+}

@@ -71,7 +71,7 @@ class _CardItemState extends State<CardItem> {
     );
 
     var bottom = Container(
-      padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+      padding: EdgeInsets.fromLTRB(20, 10, 10, 20),
       child: Column(
         children: <Widget>[
           bottomRow1,
@@ -89,13 +89,11 @@ class _CardItemState extends State<CardItem> {
     );
 
     ui = new Card(
-        elevation: 0, //设置阴影
+        //elevation: 0, //设置阴影
+        clipBehavior: Clip.antiAlias,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            side: BorderSide(
-              color: Color.fromARGB(20, 0, 0, 0),
-              width: 1.0,
-            )), //设置圆角
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        ), //设置圆角
         child: ui);
 
     return ui;

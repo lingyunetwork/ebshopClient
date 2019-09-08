@@ -12,6 +12,9 @@ class Core {
   }
 
   static void login(dynamic value) {
+    if(value is Map ==false){
+      return;
+    }
     var token = value["token"];
     RECT.setToken(token);
     sharedPreferences.setBool(Constant.KEY_LOGGED, true);

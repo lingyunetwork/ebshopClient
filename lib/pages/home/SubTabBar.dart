@@ -49,7 +49,7 @@ class _SubTabBarState extends State<SubTabBar> {
     return Container(
       child: ui,
       width: Ux.px(375),
-      height: 40,
+      height:  Ux.px(40),
       color: Colors.white,
     );
   }
