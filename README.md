@@ -16,8 +16,3 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ![Shot](shot/home.jpg)
-<<<<<<< HEAD
-//local2
-=======
-//remote
->>>>>>> 4a78e06742ca6609befa4d10ffef31ef0672c9e9
