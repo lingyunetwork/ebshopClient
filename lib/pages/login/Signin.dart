@@ -13,10 +13,12 @@ class _SigninPageState extends StateEvent<SigninPage> {
   void initState() {
     formModel = FormModel();
     var u = formModel.addByName("name");
+    u.icon = Icon(Icons.account_circle);
     u.minlen = 3;
     formModel.onChanged = onChange;
 
     var p = formModel.addByName("password");
+    p.icon = Icon(Icons.lock_open);
     p.minlen = 3;
     p.obscureText = true;
 
@@ -33,7 +35,7 @@ class _SigninPageState extends StateEvent<SigninPage> {
     var res = await RECT.post(
         "user", {"u": formModel.get("name"), "p": formModel.get("password")});
 
-    var test=true;
+    var test = true;
     if (res.success || test) {
       Core.login(res.data);
       formModel.reset();
@@ -73,21 +75,68 @@ class _SigninPageState extends StateEvent<SigninPage> {
     invalidate();
   }
 
+  Widget clipShape() {
+    var h = 150.0;
+    //double height = MediaQuery.of(context).size.height;
+    return Stack(
+      children: <Widget>[
+        Opacity(
+          opacity: 0.75,
+          child: ClipPath(
+            clipper: CustomShapeClipper(),
+            child: Container(
+              height: h,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.orange[200], Colors.pinkAccent],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Opacity(
+          opacity: 0.5,
+          child: ClipPath(
+            clipper: CustomShapeClipper2(),
+            child: Container(
+              height: h,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.orange[200], Colors.pinkAccent],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          margin: EdgeInsets.only(top: h - 100,bottom: 60),
+
+          child: Image.asset(
+            'assets/images/login.png',
+            height: 100,
+            width: 100,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget buildBody(BuildContext context) {
     this.innerContext = context;
     Widget ui = Column(
       children: <Widget>[
-        FormModelUI(
-          model: formModel,
+        clipShape(),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: FormModelUI(
+            model: formModel,
+          ),
         ),
         sendButton(),
       ],
     );
 
-    ui = Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ui,
-    );
     ;
     ui = SafeArea(
       child: ui,

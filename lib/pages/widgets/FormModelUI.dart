@@ -121,6 +121,7 @@ class FormItemVO {
   int minlen = -1;
   bool _hasError = false;
 
+  Widget icon;
   TextInputType keyboardType;
 
   bool get hasError => _hasError;
@@ -161,6 +162,8 @@ class FormItemVO {
         borderSide: new BorderSide(color: Colors.grey[200]),
         borderRadius: new BorderRadius.circular(25),
       ),
+
+      icon: icon,
 
       suffixIcon: controller.text.length > 0
           ? IconButton(
