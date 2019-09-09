@@ -40,30 +40,41 @@ part 'pages/widgets/FormModelUI.dart';
 part 'pages/widgets/FromItem.dart';
 part 'pages/widgets/SingleBar.dart';
 
-void main()=>
- runApp( App());
+void main() => runApp(App());
+
 class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     //设计时的宽度
     Ux.init(375);
-    Core.mainContext=context;
+    Core.mainContext = context;
 
     return MaterialApp(
-      title: 'Flutter Demo',
-      
+      title: 'ebShop',
       theme: ThemeData(
-        primarySwatch:Colors.red,
+        primarySwatch: Colors.red,
       ),
-
-      routes: {
-        '/MainPage': (ctx) => IndexPage(),
-        '/LoginPage': (ctx) => LoginPage(),
-        '/SigninPage': (ctx) => SigninPage(),
-      },
-      home:SplashPage(),
+      onGenerateRoute: onGenerateRoute,
+      home: SplashPage(),
       debugShowCheckedModeBanner: true,
     );
+  }
+
+  Map routes = {
+    '/MainPage': (ctx) => IndexPage(),
+    '/LoginPage': (ctx) => LoginPage(),
+    '/SigninPage': (ctx) => SigninPage(),
+  };
+
+  onGenerateRoute(RouteSettings settings) {
+    final String name = settings.name;
+    final Function pageBuilder = this.routes[name];
+    if (pageBuilder != null) {
+      final Route route = MaterialPageRoute(
+          builder: (context) =>
+              pageBuilder(context, arguments: settings.arguments));
+      return route;
+    }
   }
 }
