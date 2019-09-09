@@ -41,8 +41,11 @@ abstract class StateEvent<T extends StatefulWidget> extends State<T> {
     ));
   }
 
-  goURI(String uri) {
+  pushReplacementNamed(String uri) {
     Navigator.of(context).pushReplacementNamed(uri);
+  }
+  pushNamed(String uri) {
+    Navigator.of(context).pushNamed(uri);
   }
 
   navigate(BuildContext context, dynamic value) async {
@@ -56,6 +59,6 @@ abstract class StateEvent<T extends StatefulWidget> extends State<T> {
   }
 
   void _onUnLogin(EventX o) {
-    goURI("");
+    pushReplacementNamed("");
   }
 }

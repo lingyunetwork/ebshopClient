@@ -29,7 +29,7 @@ class _PersonalState extends StateEvent<Personal> {
   loginOut(){
     Core.logout();
 
-    goURI("/LoginPage");
+    pushReplacementNamed("/LoginPage");
   }
 
   banner() {

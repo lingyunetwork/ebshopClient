@@ -130,7 +130,7 @@ class SplashPageState extends StateEvent<SplashPage>  {
     var isLogged = sharedPreferences.containsKey(Constant.KEY_LOGGED);
     if (isLogged == false) {
       //test;
-      //uri = '/LoginPage';
+      uri = '/LoginPage';
     }
     Navigator.of(context).pushReplacementNamed(uri);
   }

@@ -39,7 +39,7 @@ class _SigninPageState extends StateEvent<SigninPage> {
       formModel.reset();
 
       var uri = '/MainPage';
-      goURI(uri);
+      pushNamed(uri);
     } else {}
   }
 

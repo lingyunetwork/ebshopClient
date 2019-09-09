@@ -44,53 +44,6 @@ class Util {
     );
     return ui;
   }
-
-  static getInput(String hintText, TextEditingController _controller,
-      ActionT<String> onSubmitted, StateEvent state) {
-    return TextFormField(
-        inputFormatters: <TextInputFormatter>[
-          LengthLimitingTextInputFormatter(11),
-          WhitelistingTextInputFormatter.digitsOnly,
-          BlacklistingTextInputFormatter.singleLineFormatter,
-        ],
-        controller: _controller,
-        keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-            hintText: hintText,
-            contentPadding: EdgeInsets.only(
-              left: 10,
-            ),
-            // filled: true,
-            // fillColor: Colors.white,
-            //contentPadding: const EdgeInsets.only(
-            //    left: 14.0, bottom: 8.0, top: 8.0),
-            // focusedBorder: OutlineInputBorder(
-            //   borderSide: new BorderSide(color: Colors.white),
-            //   borderRadius: new BorderRadius.circular(25.7),
-            // ),
-            // enabledBorder: UnderlineInputBorder(
-            //   borderSide: new BorderSide(color: Colors.white),
-            //   borderRadius: new BorderRadius.circular(25.7),
-            // ),
-            border: InputBorder.none,
-            suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  _controller.clear();
-                })),
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-        maxLines: 1,
-        //maxLength: 11,
-        maxLengthEnforced: true,
-        autocorrect: false,
-        autofocus: true,
-        onFieldSubmitted: onSubmitted,
-        onChanged: (v) => state.invalidate());
-  }
 }
 
 class TextU {

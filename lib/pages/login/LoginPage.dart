@@ -14,7 +14,7 @@ class _LoginPageState extends StateEvent<LoginPage> {
   onWeixin() {}
   onQQ() {}
   onAccount() {
-    goURI("/SigninPage");
+    pushNamed("/SigninPage");
   }
 
   @override
@@ -87,21 +87,51 @@ class _LoginPageState extends StateEvent<LoginPage> {
         ),
       ),
       Expanded(
-        child: Util.getInput("电话号码", _controller, onSubmitted, this),
+        child: TextFormField(
+            inputFormatters: <TextInputFormatter>[
+              LengthLimitingTextInputFormatter(11),
+              WhitelistingTextInputFormatter.digitsOnly,
+              BlacklistingTextInputFormatter.singleLineFormatter,
+            ],
+            controller: _controller,
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              hintText: "手机号码",
+              contentPadding: EdgeInsets.only(
+                left: 10,
+              ),
+              border: InputBorder.none,
+              suffixIcon: _controller.text.length > 0
+                  ? IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _controller.clear();
+                      })
+                  : null,
+            ),
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 20,
+            ),
+            textAlignVertical: TextAlignVertical.center,
+            maxLines: 1,
+            //maxLength: 11,
+            maxLengthEnforced: true,
+            autocorrect: false,
+            autofocus: true,
+            onFieldSubmitted: onSubmitted,
+            onChanged: (v) => this.invalidate()),
       )
     ]);
 
     var phone = Container(
-      height: 30,
+      height: 40,
+      //color: Colors.grey,
       child: ui,
       margin: EdgeInsets.only(top: 30),
     );
 
     return phone;
-
-    // return Column(
-    //   children: <Widget>[phone, phoneCode()],
-    // );
   }
 
   phoneCode() {
