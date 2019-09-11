@@ -80,7 +80,7 @@ class _HomePageState extends StateEvent<HomePage>
         getLastListSlive(data)
       ],
     );
-    return ui;
+    return Container(color: Colors.white, child: SafeArea(child: ui));
   }
 
   Widget getTopSliver(DataProvider value) {
@@ -97,8 +97,8 @@ class _HomePageState extends StateEvent<HomePage>
     header.minHeight = 90;
 
     return SliverPersistentHeader(
-      pinned: true,
-      floating: false,
+      pinned: false,
+      floating: true,
       delegate: header,
     );
   }

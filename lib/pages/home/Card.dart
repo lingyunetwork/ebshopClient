@@ -112,14 +112,15 @@ class _CardItemState extends State<CardItem> {
       children: <Widget>[icon, bottom],
     );
 
-    ui = new Card(
-        //elevation: 0, //设置阴影
-        clipBehavior: Clip.antiAlias,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        ), //设置圆角
+    return Container(
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.grey[200],
+              offset: Offset(0, 2),
+              spreadRadius: 0,
+              blurRadius: 10)
+        ]),
         child: ui);
-
-    return ui;
   }
 }

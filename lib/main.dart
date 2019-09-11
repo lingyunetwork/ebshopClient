@@ -7,12 +7,17 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:ebshop/foundation/foundation.dart';
+import 'package:ebshop/pages/car/CartPage.dart';
 import 'package:ebshop/pages/home/GoodsCard.dart';
 import 'package:ebshop/pages/widgets/CustomShape.dart';
+import 'package:ebshop/provide/CartProvide.dart';
+import 'package:ebshop/provide/CurrentIndexProvide.dart';
+import 'package:ebshop/provide/DetailsProvide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:provide/provide.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'pages/HomePage.dart';
@@ -32,15 +37,25 @@ part 'pages/login/LoginPage.dart';
 part 'pages/login/Signin.dart';
 part 'pages/post/PostArticlePage.dart';
 part 'pages/splash/Splash.dart';
-part 'pages/utils/Core.dart';
-part 'pages/utils/Utils.dart';
-part "pages/vos/vos.dart";
+
 part 'pages/widgets/DotSwiper.dart';
 part 'pages/widgets/FormModelUI.dart';
 part 'pages/widgets/FromItem.dart';
 part 'pages/widgets/SingleBar.dart';
 
-void main() => runApp(App());
+part 'utils/Core.dart';
+part 'utils/Utils.dart';
+part "vos/vos.dart";
+
+void main() {
+  var providers = Providers();
+  providers.provide(Provider.value(CurrentIndexProvide()));
+  providers.provide(Provider.value(DetailsProvide()));
+  providers.provide(Provider.value(CartProvide()));
+
+  
+  runApp(ProviderNode(child: App(), providers: providers));
+}
 
 class App extends StatelessWidget {
   // This widget is the root of your application.
@@ -55,19 +70,20 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
+      routes: routes,
       onGenerateRoute: onGenerateRoute,
       home: SplashPage(),
       debugShowCheckedModeBanner: true,
     );
   }
 
-  Map routes = {
+  final Map<String, WidgetBuilder> routes = {
     '/MainPage': (ctx) => IndexPage(),
     '/LoginPage': (ctx) => LoginPage(),
     '/SigninPage': (ctx) => SigninPage(),
   };
 
-  onGenerateRoute(RouteSettings settings) {
+  Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final String name = settings.name;
     final Function pageBuilder = this.routes[name];
     if (pageBuilder != null) {

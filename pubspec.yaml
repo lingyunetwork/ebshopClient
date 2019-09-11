@@ -28,6 +28,8 @@ dependencies:
   shared_preferences: ^0.5.3+4
   url_launcher: ^5.1.2
   dio: ^2.1.16
+  provide: ^1.0.2
+  
 
 dev_dependencies:
   flutter_test:
